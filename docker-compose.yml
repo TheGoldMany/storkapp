@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: storkapp-db
+    environment:
+      POSTGRES_USER: storkapp
+      POSTGRES_PASSWORD: storkapp_password
+      POSTGRES_DB: storkapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - storkapp-network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: storkapp-backend
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://storkapp:storkapp_password@postgres:5432/storkapp
+      JWT_SECRET: your-dev-jwt-secret-change-in-production
+      AI_SERVICE_URL: http://ai-service:8000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - storkapp-network
+    command: npm run dev
+
+  # AI Service
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: storkapp-ai
+    environment:
+      PORT: 8000
+      DATABASE_URL: postgresql://storkapp:storkapp_password@postgres:5432/storkapp
+      BACKEND_API_URL: http://backend:3000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-service:/app
+      - ai_models:/app/models
+    depends_on:
+      - postgres
+    networks:
+      - storkapp-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Frontend (React)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: storkapp-frontend
+    environment:
+      VITE_API_URL: http://localhost:3000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - storkapp-network
+    command: npm run dev
+
+networks:
+  storkapp-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  ai_models:

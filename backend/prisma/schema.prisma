@@ -1,0 +1,351 @@
+// Prisma Schema for Stork App
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER          // Normál felhasználó
+  SHELTER_ADMIN // Menhely adminisztrátor
+  VET           // Állatorvos
+  ADMIN         // Platform admin
+}
+
+enum AnimalType {
+  DOG
+  CAT
+  BIRD
+  RABBIT
+  OTHER
+}
+
+enum AnimalStatus {
+  AVAILABLE      // Örökbefogadható
+  ADOPTED        // Örökbefogadva
+  RESERVED       // Lefoglalva
+  MEDICAL_CARE   // Kezelés alatt
+  NOT_AVAILABLE  // Nem elérhető
+}
+
+enum PetStatus {
+  LOST      // Elveszett
+  FOUND     // Talált (kóbor)
+  REUNITED  // Visszatalált
+  CLOSED    // Lezárt
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+  EXPIRED
+}
+
+enum SubscriptionTier {
+  BASIC     // Alapvető
+  PREMIUM   // Prémium
+  SUPPORTER // Támogató
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  firstName     String
+  lastName      String
+  phone         String?
+  role          UserRole  @default(USER)
+  verified      Boolean   @default(false)
+  avatar        String?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  shelter       Shelter?
+  lostPets      LostPet[]
+  foundPets     FoundPet[]
+  subscriptions Subscription[]
+  donations     Donation[]
+
+  @@map("users")
+}
+
+model Shelter {
+  id              String    @id @default(uuid())
+  name            String
+  description     String?   @db.Text
+  email           String
+  phone           String
+  address         String
+  city            String
+  country         String    @default("Hungary")
+  postalCode      String?
+  latitude        Float?
+  longitude       Float?
+
+  website         String?
+  logo            String?
+  images          String[]
+
+  verified        Boolean   @default(false)
+  active          Boolean   @default(true)
+
+  // Bank account for donations
+  bankAccount     String?
+  taxNumber       String?
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  animals         Animal[]
+  subscriptions   Subscription[]
+  donations       Donation[]
+
+  @@map("shelters")
+}
+
+model Animal {
+  id              String        @id @default(uuid())
+  name            String
+  type            AnimalType
+  breed           String?
+  age             Int?          // hónapokban
+  gender          String?       // "male", "female", "unknown"
+  size            String?       // "small", "medium", "large"
+  color           String?
+  description     String?       @db.Text
+
+  images          String[]      // S3 URLs
+
+  status          AnimalStatus  @default(AVAILABLE)
+
+  // Health info
+  vaccinated      Boolean       @default(false)
+  neutered        Boolean       @default(false)
+  microchipped    Boolean       @default(false)
+  healthIssues    String?       @db.Text
+
+  // Metadata
+  intakeDate      DateTime      @default(now())
+  adoptionDate    DateTime?
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  shelterId       String
+  shelter         Shelter       @relation(fields: [shelterId], references: [id], onDelete: Cascade)
+  matches         Match[]
+
+  @@map("animals")
+}
+
+model LostPet {
+  id              String        @id @default(uuid())
+  name            String?
+  type            AnimalType
+  breed           String?
+  age             Int?
+  gender          String?
+  size            String?
+  color           String?
+  description     String        @db.Text
+
+  images          String[]
+
+  // Location info
+  lastSeenLocation String
+  lastSeenCity     String
+  lastSeenDate     DateTime
+  latitude         Float?
+  longitude        Float?
+
+  // Contact
+  contactName      String
+  contactPhone     String
+  contactEmail     String?
+
+  status           PetStatus     @default(LOST)
+  reward           Float?        // Jutalom összege
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  // Relations
+  userId           String
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matches          Match[]
+
+  @@map("lost_pets")
+}
+
+model FoundPet {
+  id              String        @id @default(uuid())
+  type            AnimalType
+  breed           String?
+  age             Int?
+  gender          String?
+  size            String?
+  color           String?
+  description     String        @db.Text
+
+  images          String[]
+
+  // Location info
+  foundLocation   String
+  foundCity       String
+  foundDate       DateTime
+  latitude        Float?
+  longitude       Float?
+
+  // Contact
+  finderName      String
+  finderPhone     String
+  finderEmail     String?
+
+  // Status
+  status          PetStatus     @default(FOUND)
+  currentLocation String?       // Hol van most (pl. ideiglenesen nálam)
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matches         Match[]
+
+  @@map("found_pets")
+}
+
+model Match {
+  id              String        @id @default(uuid())
+
+  // What is being matched
+  lostPetId       String?
+  foundPetId      String?
+  animalId        String?       // Shelter animal
+
+  // AI confidence score
+  confidence      Float         // 0-100
+  imageSimScore   Float?        // Image similarity
+
+  // Status
+  verified        Boolean       @default(false)
+  dismissed       Boolean       @default(false)
+  notes           String?       @db.Text
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  lostPet         LostPet?      @relation(fields: [lostPetId], references: [id], onDelete: Cascade)
+  foundPet        FoundPet?     @relation(fields: [foundPetId], references: [id], onDelete: Cascade)
+  animal          Animal?       @relation(fields: [animalId], references: [id], onDelete: Cascade)
+
+  @@map("matches")
+}
+
+model Subscription {
+  id              String              @id @default(uuid())
+
+  tier            SubscriptionTier
+  status          SubscriptionStatus  @default(ACTIVE)
+
+  amount          Float               // Monthly amount
+  currency        String              @default("HUF")
+
+  // Stripe
+  stripeCustomerId       String?
+  stripeSubscriptionId   String?      @unique
+  stripePriceId          String?
+
+  currentPeriodStart     DateTime
+  currentPeriodEnd       DateTime
+  cancelAtPeriodEnd      Boolean      @default(false)
+
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  // Relations
+  userId          String?
+  user            User?               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shelterId       String?
+  shelter         Shelter?            @relation(fields: [shelterId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+model Donation {
+  id              String        @id @default(uuid())
+
+  amount          Float
+  currency        String        @default("HUF")
+  message         String?       @db.Text
+  anonymous       Boolean       @default(false)
+
+  // Stripe
+  stripePaymentId String?       @unique
+  stripeStatus    String?
+
+  createdAt       DateTime      @default(now())
+
+  // Relations
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  shelterId       String
+  shelter         Shelter       @relation(fields: [shelterId], references: [id], onDelete: Cascade)
+
+  @@map("donations")
+}
+
+model HealthInfo {
+  id              String        @id @default(uuid())
+
+  animalType      AnimalType
+  category        String        // "care", "health", "nutrition", "behavior"
+  title           String
+  content         String        @db.Text
+
+  tags            String[]
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("health_info")
+}
+
+model Veterinarian {
+  id              String        @id @default(uuid())
+
+  name            String
+  clinicName      String
+  email           String
+  phone           String
+  address         String
+  city            String
+
+  specialization  String[]      // "general", "surgery", "dental", etc.
+
+  latitude        Float?
+  longitude       Float?
+
+  website         String?
+  rating          Float?
+
+  active          Boolean       @default(true)
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("veterinarians")
+}
