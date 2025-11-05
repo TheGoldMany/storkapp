@@ -1,10 +1,12 @@
 import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { AnimalType } from '../types/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 
 const prisma = new PrismaClient();
+
+// Type alias
+type AnimalType = 'DOG' | 'CAT' | 'BIRD' | 'RABBIT' | 'OTHER';
 
 export const createHealthInfo = asyncHandler(async (req: AuthRequest, res: Response) => {
   const { animalType, category, title, content, tags } = req.body;

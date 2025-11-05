@@ -1,6 +1,5 @@
 import { Response, Request } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { SubscriptionTier } from '../types/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import Stripe from 'stripe';
@@ -9,6 +8,11 @@ const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16',
 });
+
+// Type alias
+type SubscriptionTier = 'BASIC' | 'PREMIUM' | 'SUPPORTER';
+
+const VALID_TIERS = ['BASIC', 'PREMIUM', 'SUPPORTER'];
 
 const TIER_PRICES: Record<SubscriptionTier, number> = {
   BASIC: 1000,      // 1000 HUF/month
@@ -19,7 +23,7 @@ const TIER_PRICES: Record<SubscriptionTier, number> = {
 export const createSubscription = asyncHandler(async (req: AuthRequest, res: Response) => {
   const { tier, shelterId } = req.body;
 
-  if (!Object.values(SubscriptionTier).includes(tier)) {
+  if (!VALID_TIERS.includes(tier)) {
     throw new AppError('Invalid subscription tier', 400);
   }
 

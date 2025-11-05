@@ -8,7 +8,7 @@ import {
   getMyShelter,
 } from '../controllers/shelter.controller';
 import { authenticate, authorize } from '../middleware/auth';
-import { UserRole } from '../types/prisma';
+
 
 export const shelterRouter = Router();
 
@@ -20,6 +20,6 @@ shelterRouter.get('/:id', getShelterById);
 shelterRouter.use(authenticate);
 
 shelterRouter.get('/me/shelter', getMyShelter);
-shelterRouter.post('/', authorize(UserRole.USER, UserRole.SHELTER_ADMIN), createShelter);
-shelterRouter.put('/:id', authorize(UserRole.SHELTER_ADMIN, UserRole.ADMIN), updateShelter);
-shelterRouter.delete('/:id', authorize(UserRole.SHELTER_ADMIN, UserRole.ADMIN), deleteShelter);
+shelterRouter.post('/', authorize('USER', 'SHELTER_ADMIN'), createShelter);
+shelterRouter.put('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), updateShelter);
+shelterRouter.delete('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), deleteShelter);

@@ -1,10 +1,14 @@
 import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { AnimalType, AnimalStatus } from '../types/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 
 const prisma = new PrismaClient();
+
+// Type aliases that work with or without Prisma client generated
+type AnimalType = 'DOG' | 'CAT' | 'BIRD' | 'RABBIT' | 'OTHER';
+type AnimalStatus = 'AVAILABLE' | 'ADOPTED' | 'RESERVED' | 'MEDICAL_CARE' | 'NOT_AVAILABLE';
+
 
 export const createAnimal = asyncHandler(async (req: AuthRequest, res: Response) => {
   // Get user's shelter

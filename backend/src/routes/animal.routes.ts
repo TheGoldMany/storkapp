@@ -7,7 +7,6 @@ import {
   deleteAnimal,
 } from '../controllers/animal.controller';
 import { authenticate, authorize } from '../middleware/auth';
-import { UserRole } from '../types/prisma';
 
 export const animalRouter = Router();
 
@@ -17,6 +16,6 @@ animalRouter.get('/:id', getAnimalById);
 
 // Protected routes (shelter admins)
 animalRouter.use(authenticate);
-animalRouter.post('/', authorize(UserRole.SHELTER_ADMIN, UserRole.ADMIN), createAnimal);
-animalRouter.put('/:id', authorize(UserRole.SHELTER_ADMIN, UserRole.ADMIN), updateAnimal);
-animalRouter.delete('/:id', authorize(UserRole.SHELTER_ADMIN, UserRole.ADMIN), deleteAnimal);
+animalRouter.post('/', authorize('SHELTER_ADMIN', 'ADMIN'), createAnimal);
+animalRouter.put('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), updateAnimal);
+animalRouter.delete('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), deleteAnimal);

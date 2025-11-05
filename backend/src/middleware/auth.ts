@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import { UserRole } from '../types/prisma';
 import { AppError } from './errorHandler';
 
 const prisma = new PrismaClient();
@@ -10,9 +9,11 @@ export interface AuthRequest extends Request {
   user?: {
     id: string;
     email: string;
-    role: UserRole;
+    role: string;
   };
 }
+
+type UserRole = string;
 
 export const authenticate = async (
   req: AuthRequest,
