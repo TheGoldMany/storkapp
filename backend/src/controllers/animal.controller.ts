@@ -1,5 +1,6 @@
 import { Response } from 'express';
-import { PrismaClient, AnimalType, AnimalStatus } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { AnimalType, AnimalStatus } from '../types/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 

@@ -16,9 +16,9 @@ export class AppError extends Error {
 
 export const errorHandler = (
   err: Error | AppError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   logger.error(`Error: ${err.message}`, { stack: err.stack });
 
@@ -46,7 +46,8 @@ export const errorHandler = (
   });
 };
 
-export const asyncHandler = (fn: Function) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const asyncHandler = (fn: any) => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };

@@ -47,8 +47,7 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
   // Generate token
   const token = jwt.sign(
     { userId: user.id, email: user.email, role: user.role },
-    process.env.JWT_SECRET!,
-    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    process.env.JWT_SECRET as string
   );
 
   res.status(201).json({
@@ -80,8 +79,7 @@ export const login = asyncHandler(async (req: AuthRequest, res: Response) => {
   // Generate token
   const token = jwt.sign(
     { userId: user.id, email: user.email, role: user.role },
-    process.env.JWT_SECRET!,
-    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    process.env.JWT_SECRET as string
   );
 
   res.json({

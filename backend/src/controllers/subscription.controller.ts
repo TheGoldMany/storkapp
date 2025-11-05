@@ -1,12 +1,13 @@
 import { Response, Request } from 'express';
-import { PrismaClient, SubscriptionTier } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { SubscriptionTier } from '../types/prisma';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import Stripe from 'stripe';
 
 const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2023-10-16',
 });
 
 const TIER_PRICES: Record<SubscriptionTier, number> = {
@@ -59,13 +60,12 @@ export const createSubscription = asyncHandler(async (req: AuthRequest, res: Res
           currency: 'huf',
           product_data: {
             name: `${tier} Subscription`,
-            description: `Monthly subscription to support ${shelter.name}`,
-          },
+          } as any,
           unit_amount: TIER_PRICES[tier as SubscriptionTier],
           recurring: {
             interval: 'month',
           },
-        },
+        } as any,
       },
     ],
     payment_behavior: 'default_incomplete',

@@ -6,7 +6,7 @@ import Stripe from 'stripe';
 
 const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2023-10-16',
 });
 
 export const createDonation = asyncHandler(async (req: AuthRequest, res: Response) => {
@@ -120,7 +120,7 @@ export const getShelterDonations = asyncHandler(async (req: AuthRequest, res: Re
   ]);
 
   // Hide user info for anonymous donations
-  const sanitizedDonations = donations.map(d => ({
+  const sanitizedDonations = donations.map((d: any) => ({
     ...d,
     user: d.anonymous ? null : d.user,
   }));
