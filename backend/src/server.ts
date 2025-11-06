@@ -32,6 +32,28 @@ app.use((req, _res, next) => {
   next();
 });
 
+// Root endpoint - API information
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'Stork App API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      shelters: '/api/shelters',
+      animals: '/api/animals',
+      lostPets: '/api/lost-pets',
+      foundPets: '/api/found-pets',
+      subscriptions: '/api/subscriptions',
+      donations: '/api/donations',
+      healthInfo: '/api/health-info',
+      matches: '/api/matches'
+    },
+    documentation: 'https://github.com/TheGoldMany/storkapp'
+  });
+});
+
 // Health check
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
