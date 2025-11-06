@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import VerifyEmailPage from './pages/VerifyEmailPage'
 import ShelterRegisterPage from './pages/ShelterRegisterPage'
 import SheltersPage from './pages/SheltersPage'
 import ShelterDetailPage from './pages/ShelterDetailPage'
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
 
           <Route path="/shelters" element={<SheltersPage />} />
           <Route path="/shelters/:id" element={<ShelterDetailPage />} />

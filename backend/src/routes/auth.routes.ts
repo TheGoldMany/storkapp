@@ -1,5 +1,12 @@
 import { Router } from 'express';
-import { register, login, getProfile, updateProfile } from '../controllers/auth.controller';
+import {
+  register,
+  login,
+  getProfile,
+  updateProfile,
+  verifyEmail,
+  resendVerification
+} from '../controllers/auth.controller';
 import { authenticate } from '../middleware/auth';
 import { body } from 'express-validator';
 
@@ -21,5 +28,7 @@ const loginValidation = [
 // Routes
 authRouter.post('/register', registerValidation, register);
 authRouter.post('/login', loginValidation, login);
+authRouter.post('/verify-email', verifyEmail);
+authRouter.post('/resend-verification', resendVerification);
 authRouter.get('/profile', authenticate, getProfile);
 authRouter.put('/profile', authenticate, updateProfile);

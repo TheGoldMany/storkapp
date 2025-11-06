@@ -63,6 +63,10 @@ model User {
   verified      Boolean   @default(false)
   avatar        String?
 
+  // Email verification
+  verificationToken        String?
+  verificationTokenExpires DateTime?
+
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
