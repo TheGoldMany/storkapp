@@ -15,7 +15,7 @@ class EmailService {
     // Create transporter based on environment
     if (process.env.NODE_ENV === 'production') {
       // Production: használd az igazi SMTP szolgáltatást (pl. Gmail, SendGrid, stb.)
-      this.transporter = nodemailer.createTransporter({
+      this.transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: parseInt(process.env.SMTP_PORT || '587'),
         secure: process.env.SMTP_SECURE === 'true',
@@ -28,7 +28,7 @@ class EmailService {
       // Development: Használd az Ethereal email service-t (fake SMTP)
       // Vagy ha van beállítva SMTP, használd azt
       if (process.env.SMTP_HOST) {
-        this.transporter = nodemailer.createTransporter({
+        this.transporter = nodemailer.createTransport({
           host: process.env.SMTP_HOST,
           port: parseInt(process.env.SMTP_PORT || '587'),
           secure: false,
@@ -39,7 +39,7 @@ class EmailService {
         });
       } else {
         // Fallback: console logging
-        this.transporter = nodemailer.createTransporter({
+        this.transporter = nodemailer.createTransport({
           streamTransport: true,
           newline: 'unix',
           buffer: true,
