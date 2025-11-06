@@ -5,13 +5,8 @@ import { AppError } from './errorHandler';
 
 const prisma = new PrismaClient();
 
-export interface AuthRequest extends Request {
-  user?: {
-    id: string;
-    email: string;
-    role: string;
-  };
-}
+// AuthRequest is now just an alias for Request since we defined user in express.d.ts
+export type AuthRequest = Request;
 
 type UserRole = string;
 
