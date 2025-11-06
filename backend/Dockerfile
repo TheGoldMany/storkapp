@@ -20,6 +20,10 @@ RUN npx prisma generate
 # Build TypeScript
 RUN npm run build
 
+# Make start script executable
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["/app/start.sh"]
