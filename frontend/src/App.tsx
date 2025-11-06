@@ -16,7 +16,10 @@ import ShelterDetailPage from './pages/ShelterDetailPage'
 import AnimalsPage from './pages/AnimalsPage'
 import AnimalDetailPage from './pages/AnimalDetailPage'
 import LostPetsPage from './pages/LostPetsPage'
+import ReportLostPetPage from './pages/ReportLostPetPage'
 import FoundPetsPage from './pages/FoundPetsPage'
+import ReportFoundPetPage from './pages/ReportFoundPetPage'
+import TipsPage from './pages/TipsPage'
 import DashboardPage from './pages/DashboardPage'
 import ProfilePage from './pages/ProfilePage'
 import HealthInfoPage from './pages/HealthInfoPage'
@@ -51,6 +54,10 @@ function App() {
           <Route path="/animals" element={<AnimalsPage />} />
           <Route path="/animals/:id" element={<AnimalDetailPage />} />
 
+          <Route path="/lost-pets" element={<LostPetsPage />} />
+          <Route path="/found-pets" element={<FoundPetsPage />} />
+
+          <Route path="/tips" element={<TipsPage />} />
           <Route path="/health-info" element={<HealthInfoPage />} />
 
           {/* Protected routes */}
@@ -59,6 +66,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <ShelterRegisterPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lost-pets/report"
+            element={
+              <ProtectedRoute>
+                <ReportLostPetPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/found-pets/report"
+            element={
+              <ProtectedRoute>
+                <ReportFoundPetPage />
               </ProtectedRoute>
             }
           />
@@ -75,22 +98,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/lost-pets"
-            element={
-              <ProtectedRoute>
-                <LostPetsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/found-pets"
-            element={
-              <ProtectedRoute>
-                <FoundPetsPage />
               </ProtectedRoute>
             }
           />

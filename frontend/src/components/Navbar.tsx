@@ -49,7 +49,7 @@ const Navbar = () => {
             <Button color="inherit" component={Link} to="/found-pets">
               Talált
             </Button>
-            <Button color="inherit" component={Link} to="/health-info">
+            <Button color="inherit" component={Link} to="/tips">
               Tanácsok
             </Button>
           </Box>
