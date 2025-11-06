@@ -28,6 +28,8 @@ services:
       DATABASE_URL: postgresql://storkapp:storkapp_password@postgres:5432/storkapp
       JWT_SECRET: your-dev-jwt-secret-change-in-production
       AI_SERVICE_URL: http://ai-service:8000
+      FRONTEND_URL: http://localhost:5173
+      EMAIL_FROM: "Stork App <noreply@storkapp.hu>"
     ports:
       - "3000:3000"
     volumes:
