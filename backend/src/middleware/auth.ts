@@ -37,9 +37,8 @@ export const authenticate = async (
       throw new AppError('User not found', 401);
     }
 
-    if (!user.verified) {
-      throw new AppError('Please verify your email', 403);
-    }
+    // Note: We don't block unverified users here - they can access the app
+    // but certain features may require verification (handled at endpoint level)
 
     req.user = {
       id: user.id,
