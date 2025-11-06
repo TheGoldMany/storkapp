@@ -35,8 +35,10 @@ export const authAPI = {
 export const shelterAPI = {
   getShelters: (params?: any) => api.get('/shelters', { params }),
   getShelterById: (id: string) => api.get(`/shelters/${id}`),
+  getMyShelter: () => api.get('/shelters/my'),
   createShelter: (data: any) => api.post('/shelters', data),
   updateShelter: (id: string, data: any) => api.put(`/shelters/${id}`, data),
+  deleteShelter: (id: string) => api.delete(`/shelters/${id}`),
 }
 
 // Animal API
@@ -45,6 +47,7 @@ export const animalAPI = {
   getAnimalById: (id: string) => api.get(`/animals/${id}`),
   createAnimal: (data: any) => api.post('/animals', data),
   updateAnimal: (id: string, data: any) => api.put(`/animals/${id}`, data),
+  deleteAnimal: (id: string) => api.delete(`/animals/${id}`),
 }
 
 // Lost Pet API

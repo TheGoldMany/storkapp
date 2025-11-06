@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ShelterRegisterPage from './pages/ShelterRegisterPage'
 import SheltersPage from './pages/SheltersPage'
 import ShelterDetailPage from './pages/ShelterDetailPage'
 import AnimalsPage from './pages/AnimalsPage'
@@ -51,6 +52,14 @@ function App() {
           <Route path="/health-info" element={<HealthInfoPage />} />
 
           {/* Protected routes */}
+          <Route
+            path="/shelter/register"
+            element={
+              <ProtectedRoute>
+                <ShelterRegisterPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/dashboard"
             element={

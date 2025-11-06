@@ -14,12 +14,13 @@ export const shelterRouter = Router();
 
 // Public routes
 shelterRouter.get('/', getShelters);
+
+// Protected routes (must come before :id route to avoid conflicts)
+shelterRouter.get('/my', authenticate, getMyShelter);
+
 shelterRouter.get('/:id', getShelterById);
 
-// Protected routes
 shelterRouter.use(authenticate);
-
-shelterRouter.get('/me/shelter', getMyShelter);
 shelterRouter.post('/', authorize('USER', 'SHELTER_ADMIN'), createShelter);
 shelterRouter.put('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), updateShelter);
 shelterRouter.delete('/:id', authorize('SHELTER_ADMIN', 'ADMIN'), deleteShelter);
