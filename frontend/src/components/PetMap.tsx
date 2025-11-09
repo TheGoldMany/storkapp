@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import { Box, Typography, Chip, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { lostPetAPI, foundPetAPI } from '../services/api'
+import { lostPetAPI, foundPetAPI, shelterAPI } from '../services/api'
 
 // Fix for default marker icons in Leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -65,11 +65,25 @@ interface Pet {
   foundDate?: string
 }
 
+interface Shelter {
+  id: string
+  name: string
+  city: string
+  address: string
+  latitude?: number
+  longitude?: number
+  verified: boolean
+  _count?: {
+    animals: number
+  }
+}
+
 const PetMap: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [lostPets, setLostPets] = useState<Pet[]>([])
   const [foundPets, setFoundPets] = useState<Pet[]>([])
+  const [shelters, setShelters] = useState<Shelter[]>([])
   const [loading, setLoading] = useState(true)
 
   // Default center: Budapest, Hungary
@@ -82,13 +96,15 @@ const PetMap: React.FC = () => {
   const fetchMapData = async () => {
     try {
       setLoading(true)
-      const [lostResponse, foundResponse] = await Promise.all([
+      const [lostResponse, foundResponse, shelterResponse] = await Promise.all([
         lostPetAPI.getLostPets({ limit: 100 }),
-        foundPetAPI.getFoundPets({ limit: 100 })
+        foundPetAPI.getFoundPets({ limit: 100 }),
+        shelterAPI.getShelters({ limit: 100 })
       ])
 
       setLostPets(lostResponse.data.data.lostPets || [])
       setFoundPets(foundResponse.data.data.foundPets || [])
+      setShelters(shelterResponse.data.data.shelters || [])
     } catch (error) {
       console.error('Failed to fetch map data:', error)
     } finally {
@@ -203,6 +219,53 @@ const PetMap: React.FC = () => {
                     variant="contained"
                     fullWidth
                     onClick={() => navigate(`/found-pets/${pet.id}`)}
+                  >
+                    {t('map.viewDetails')}
+                  </Button>
+                </Box>
+              </Popup>
+            </Marker>
+          )
+        })}
+
+        {/* Shelter Markers */}
+        {shelters.map((shelter) => {
+          if (!shelter.latitude || !shelter.longitude) return null
+          return (
+            <Marker
+              key={`shelter-${shelter.id}`}
+              position={[shelter.latitude, shelter.longitude]}
+              icon={shelterIcon}
+            >
+              <Popup>
+                <Box sx={{ p: 1, minWidth: 200 }}>
+                  <Typography variant="h6" gutterBottom>
+                    {shelter.name}
+                  </Typography>
+                  {shelter.verified && (
+                    <Chip
+                      label={t('shelters.verified')}
+                      color="primary"
+                      size="small"
+                      sx={{ mb: 1 }}
+                    />
+                  )}
+                  <Typography variant="body2" color="text.secondary">
+                    {shelter.city}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                    {shelter.address}
+                  </Typography>
+                  {shelter._count && (
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                      {t('shelters.availableAnimals')}: {shelter._count.animals}
+                    </Typography>
+                  )}
+                  <Button
+                    size="small"
+                    variant="contained"
+                    fullWidth
+                    onClick={() => navigate(`/shelters/${shelter.id}`)}
                   >
                     {t('map.viewDetails')}
                   </Button>
