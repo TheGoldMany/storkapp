@@ -24,6 +24,7 @@ const AnimalDetailPage = () => {
   const [animal, setAnimal] = useState<any>(null)
   const [shelter, setShelter] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   useEffect(() => {
     if (id) {
@@ -121,7 +122,9 @@ const AnimalDetailPage = () => {
                 : 'none',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
+              cursor: animal.images?.length > 0 ? 'pointer' : 'default',
             }}
+            onClick={() => animal.images?.length > 0 && setSelectedImage(animal.images[0])}
           >
             {!animal.images?.length && (
               <PetsIcon sx={{ fontSize: 120, color: 'primary.main' }} />
@@ -148,6 +151,7 @@ const AnimalDetailPage = () => {
                     backgroundPosition: 'center',
                     cursor: 'pointer',
                   }}
+                  onClick={() => setSelectedImage(img)}
                 />
               ))}
             </Box>
@@ -304,6 +308,36 @@ const AnimalDetailPage = () => {
           </Grid>
         )}
       </Grid>
+
+      {/* Image Lightbox */}
+      {selectedImage && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bgcolor: 'rgba(0, 0, 0, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            cursor: 'pointer',
+          }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <img
+            src={`http://localhost:3000${selectedImage}`}
+            alt="Animal"
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              objectFit: 'contain',
+            }}
+          />
+        </Box>
+      )}
     </Container>
   )
 }

@@ -16,8 +16,10 @@ import ShelterDetailPage from './pages/ShelterDetailPage'
 import AnimalsPage from './pages/AnimalsPage'
 import AnimalDetailPage from './pages/AnimalDetailPage'
 import LostPetsPage from './pages/LostPetsPage'
+import LostPetDetailPage from './pages/LostPetDetailPage'
 import ReportLostPetPage from './pages/ReportLostPetPage'
 import FoundPetsPage from './pages/FoundPetsPage'
+import FoundPetDetailPage from './pages/FoundPetDetailPage'
 import ReportFoundPetPage from './pages/ReportFoundPetPage'
 import TipsPage from './pages/TipsPage'
 import DashboardPage from './pages/DashboardPage'
@@ -55,7 +57,9 @@ function App() {
           <Route path="/animals/:id" element={<AnimalDetailPage />} />
 
           <Route path="/lost-pets" element={<LostPetsPage />} />
+          <Route path="/lost-pets/:id" element={<LostPetDetailPage />} />
           <Route path="/found-pets" element={<FoundPetsPage />} />
+          <Route path="/found-pets/:id" element={<FoundPetDetailPage />} />
 
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/health-info" element={<HealthInfoPage />} />
