@@ -230,6 +230,7 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email",
+    "emailNotEditable": "Email address cannot be changed",
     "phone": "Phone",
     "avatar": "Avatar",
     "uploadAvatar": "Upload Avatar",
@@ -257,6 +258,31 @@
     "loggingIn": "Logging in...",
     "registering": "Registering...",
     "loginSuccess": "Login successful",
-    "registerSuccess": "Registration successful"
+    "registerSuccess": "Registration successful",
+    "accountType": "Account Type",
+    "individual": "Individual",
+    "shelter": "Shelter",
+    "shelterData": "Shelter Information",
+    "shelterName": "Shelter Name",
+    "shelterCity": "City",
+    "shelterAddress": "Address",
+    "shelterDescription": "Brief Description (optional)",
+    "shelterDescriptionPlaceholder": "Write a few sentences about your shelter...",
+    "shelterWebsite": "Website",
+    "shelterLogo": "Shelter Logo",
+    "phoneOptional": "Phone Number (optional)",
+    "createAccount": "Create your Stork App account",
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters long",
+      "passwordMismatch": "Passwords do not match",
+      "shelterNameRequired": "Shelter name is required",
+      "shelterAddressRequired": "Address is required",
+      "shelterCityRequired": "City is required"
+    }
   }
 }

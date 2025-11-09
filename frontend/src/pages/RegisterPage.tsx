@@ -24,10 +24,12 @@ import {
   Person as PersonIcon,
   Business as BusinessIcon,
 } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 import { registerUser, clearError } from '../store/slices/authSlice'
 import { AppDispatch, RootState } from '../store/store'
 
 const RegisterPage = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const { isAuthenticated, loading, error } = useSelector((state: RootState) => state.auth)
@@ -79,39 +81,39 @@ const RegisterPage = () => {
     const errors: Record<string, string> = {}
 
     if (!formData.firstName.trim()) {
-      errors.firstName = 'Keresztnév megadása kötelező'
+      errors.firstName = t('auth.validation.firstNameRequired')
     }
 
     if (!formData.lastName.trim()) {
-      errors.lastName = 'Vezetéknév megadása kötelező'
+      errors.lastName = t('auth.validation.lastNameRequired')
     }
 
     if (!formData.email.trim()) {
-      errors.email = 'Email megadása kötelező'
+      errors.email = t('auth.validation.emailRequired')
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Érvénytelen email formátum'
+      errors.email = t('auth.validation.emailInvalid')
     }
 
     if (!formData.password) {
-      errors.password = 'Jelszó megadása kötelező'
+      errors.password = t('auth.validation.passwordRequired')
     } else if (formData.password.length < 6) {
-      errors.password = 'A jelszónak legalább 6 karakter hosszúnak kell lennie'
+      errors.password = t('auth.validation.passwordMinLength')
     }
 
     if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = 'A jelszavak nem egyeznek'
+      errors.confirmPassword = t('auth.validation.passwordMismatch')
     }
 
     // Shelter-specific validation
     if (accountType === 'SHELTER_ADMIN') {
       if (!formData.shelterName.trim()) {
-        errors.shelterName = 'Menhely neve kötelező'
+        errors.shelterName = t('auth.validation.shelterNameRequired')
       }
       if (!formData.shelterAddress.trim()) {
-        errors.shelterAddress = 'Cím megadása kötelező'
+        errors.shelterAddress = t('auth.validation.shelterAddressRequired')
       }
       if (!formData.shelterCity.trim()) {
-        errors.shelterCity = 'Város megadása kötelező'
+        errors.shelterCity = t('auth.validation.shelterCityRequired')
       }
     }
 
@@ -160,10 +162,10 @@ const RegisterPage = () => {
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <PersonAddIcon sx={{ fontSize: 48, color: 'primary.main', mb: 1 }} />
             <Typography variant="h4" component="h1" gutterBottom>
-              Regisztráció
+              {t('auth.register')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Hozd létre a Stork App fiókodat
+              {t('auth.createAccount')}
             </Typography>
           </Box>
 
@@ -186,11 +188,11 @@ const RegisterPage = () => {
               >
                 <ToggleButton value="USER">
                   <PersonIcon sx={{ mr: 1 }} />
-                  Magánszemély
+                  {t('auth.individual')}
                 </ToggleButton>
                 <ToggleButton value="SHELTER_ADMIN">
                   <BusinessIcon sx={{ mr: 1 }} />
-                  Menhely
+                  {t('auth.shelter')}
                 </ToggleButton>
               </ToggleButtonGroup>
             </Box>
@@ -201,7 +203,7 @@ const RegisterPage = () => {
                   required
                   fullWidth
                   id="firstName"
-                  label="Keresztnév"
+                  label={t('auth.firstName')}
                   name="firstName"
                   autoComplete="given-name"
                   autoFocus
@@ -217,7 +219,7 @@ const RegisterPage = () => {
                   required
                   fullWidth
                   id="lastName"
-                  label="Vezetéknév"
+                  label={t('auth.lastName')}
                   name="lastName"
                   autoComplete="family-name"
                   value={formData.lastName}
@@ -234,7 +236,7 @@ const RegisterPage = () => {
               required
               fullWidth
               id="email"
-              label="Email cím"
+              label={t('auth.email')}
               name="email"
               autoComplete="email"
               value={formData.email}
@@ -248,7 +250,7 @@ const RegisterPage = () => {
               margin="normal"
               fullWidth
               id="phone"
-              label="Telefonszám (opcionális)"
+              label={t('auth.phoneOptional')}
               name="phone"
               autoComplete="tel"
               value={formData.phone}
@@ -261,7 +263,7 @@ const RegisterPage = () => {
               <>
                 <Divider sx={{ my: 3 }}>
                   <Typography variant="body2" color="text.secondary">
-                    Menhely adatok
+                    {t('auth.shelterData')}
                   </Typography>
                 </Divider>
 
@@ -270,7 +272,7 @@ const RegisterPage = () => {
                   required
                   fullWidth
                   id="shelterName"
-                  label="Menhely neve"
+                  label={t('auth.shelterName')}
                   name="shelterName"
                   value={formData.shelterName}
                   onChange={handleChange}
@@ -285,7 +287,7 @@ const RegisterPage = () => {
                       required
                       fullWidth
                       id="shelterCity"
-                      label="Város"
+                      label={t('auth.shelterCity')}
                       name="shelterCity"
                       value={formData.shelterCity}
                       onChange={handleChange}
@@ -299,7 +301,7 @@ const RegisterPage = () => {
                       required
                       fullWidth
                       id="shelterAddress"
-                      label="Cím"
+                      label={t('auth.shelterAddress')}
                       name="shelterAddress"
                       value={formData.shelterAddress}
                       onChange={handleChange}
@@ -316,12 +318,12 @@ const RegisterPage = () => {
                   multiline
                   rows={3}
                   id="shelterDescription"
-                  label="Rövid leírás (opcionális)"
+                  label={t('auth.shelterDescription')}
                   name="shelterDescription"
                   value={formData.shelterDescription}
                   onChange={handleChange}
                   disabled={loading}
-                  placeholder="Írj néhány mondatot a menhelyről..."
+                  placeholder={t('auth.shelterDescriptionPlaceholder')}
                 />
 
                 <Divider sx={{ my: 3 }} />
@@ -333,7 +335,7 @@ const RegisterPage = () => {
               required
               fullWidth
               name="password"
-              label="Jelszó"
+              label={t('auth.password')}
               type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="new-password"
@@ -362,7 +364,7 @@ const RegisterPage = () => {
               required
               fullWidth
               name="confirmPassword"
-              label="Jelszó megerősítése"
+              label={t('auth.confirmPassword')}
               type={showPassword ? 'text' : 'password'}
               id="confirmPassword"
               autoComplete="new-password"
@@ -381,14 +383,14 @@ const RegisterPage = () => {
               sx={{ mt: 3, mb: 2 }}
               disabled={loading}
             >
-              {loading ? 'Regisztráció...' : 'Regisztráció'}
+              {loading ? t('auth.registering') : t('auth.register')}
             </Button>
 
             <Box sx={{ textAlign: 'center', mt: 2 }}>
               <Typography variant="body2">
-                Már van fiókod?{' '}
+                {t('auth.hasAccount')}{' '}
                 <Link component={RouterLink} to="/login" underline="hover">
-                  Jelentkezz be itt
+                  {t('auth.loginHere')}
                 </Link>
               </Typography>
             </Box>

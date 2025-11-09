@@ -230,6 +230,7 @@
     "firstName": "Keresztnév",
     "lastName": "Vezetéknév",
     "email": "Email",
+    "emailNotEditable": "Az email cím nem módosítható",
     "phone": "Telefon",
     "avatar": "Profilkép",
     "uploadAvatar": "Profilkép feltöltése",
@@ -257,6 +258,31 @@
     "loggingIn": "Bejelentkezés...",
     "registering": "Regisztráció...",
     "loginSuccess": "Sikeres bejelentkezés",
-    "registerSuccess": "Sikeres regisztráció"
+    "registerSuccess": "Sikeres regisztráció",
+    "accountType": "Fiók típusa",
+    "individual": "Magánszemély",
+    "shelter": "Menhely",
+    "shelterData": "Menhely adatok",
+    "shelterName": "Menhely neve",
+    "shelterCity": "Város",
+    "shelterAddress": "Cím",
+    "shelterDescription": "Rövid leírás (opcionális)",
+    "shelterDescriptionPlaceholder": "Írj néhány mondatot a menhelyről...",
+    "shelterWebsite": "Website",
+    "shelterLogo": "Menhely logó",
+    "phoneOptional": "Telefonszám (opcionális)",
+    "createAccount": "Hozd létre a Stork App fiókodat",
+    "validation": {
+      "firstNameRequired": "Keresztnév megadása kötelező",
+      "lastNameRequired": "Vezetéknév megadása kötelező",
+      "emailRequired": "Email megadása kötelező",
+      "emailInvalid": "Érvénytelen email formátum",
+      "passwordRequired": "Jelszó megadása kötelező",
+      "passwordMinLength": "A jelszónak legalább 6 karakter hosszúnak kell lennie",
+      "passwordMismatch": "A jelszavak nem egyeznek",
+      "shelterNameRequired": "Menhely neve kötelező",
+      "shelterAddressRequired": "Cím megadása kötelező",
+      "shelterCityRequired": "Város megadása kötelező"
+    }
   }
 }

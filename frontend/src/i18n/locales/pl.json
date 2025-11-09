@@ -230,6 +230,7 @@
     "firstName": "Imię",
     "lastName": "Nazwisko",
     "email": "Email",
+    "emailNotEditable": "Adres email nie może zostać zmieniony",
     "phone": "Telefon",
     "avatar": "Awatar",
     "uploadAvatar": "Prześlij awatar",
@@ -257,6 +258,31 @@
     "loggingIn": "Logowanie...",
     "registering": "Rejestracja...",
     "loginSuccess": "Logowanie udane",
-    "registerSuccess": "Rejestracja udana"
+    "registerSuccess": "Rejestracja udana",
+    "accountType": "Typ konta",
+    "individual": "Osoba prywatna",
+    "shelter": "Schronisko",
+    "shelterData": "Dane schroniska",
+    "shelterName": "Nazwa schroniska",
+    "shelterCity": "Miasto",
+    "shelterAddress": "Adres",
+    "shelterDescription": "Krótki opis (opcjonalnie)",
+    "shelterDescriptionPlaceholder": "Napisz kilka zdań o swoim schronisku...",
+    "shelterWebsite": "Strona internetowa",
+    "shelterLogo": "Logo schroniska",
+    "phoneOptional": "Numer telefonu (opcjonalnie)",
+    "createAccount": "Utwórz konto Stork App",
+    "validation": {
+      "firstNameRequired": "Imię jest wymagane",
+      "lastNameRequired": "Nazwisko jest wymagane",
+      "emailRequired": "Email jest wymagany",
+      "emailInvalid": "Nieprawidłowy format email",
+      "passwordRequired": "Hasło jest wymagane",
+      "passwordMinLength": "Hasło musi mieć co najmniej 6 znaków",
+      "passwordMismatch": "Hasła nie pasują do siebie",
+      "shelterNameRequired": "Nazwa schroniska jest wymagana",
+      "shelterAddressRequired": "Adres jest wymagany",
+      "shelterCityRequired": "Miasto jest wymagane"
+    }
   }
 }

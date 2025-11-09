@@ -230,6 +230,7 @@
     "firstName": "Vorname",
     "lastName": "Nachname",
     "email": "E-Mail",
+    "emailNotEditable": "E-Mail-Adresse kann nicht geändert werden",
     "phone": "Telefon",
     "avatar": "Avatar",
     "uploadAvatar": "Avatar hochladen",
@@ -257,6 +258,31 @@
     "loggingIn": "Anmeldung...",
     "registering": "Registrierung...",
     "loginSuccess": "Anmeldung erfolgreich",
-    "registerSuccess": "Registrierung erfolgreich"
+    "registerSuccess": "Registrierung erfolgreich",
+    "accountType": "Kontotyp",
+    "individual": "Privatperson",
+    "shelter": "Tierheim",
+    "shelterData": "Tierheim-Informationen",
+    "shelterName": "Name des Tierheims",
+    "shelterCity": "Stadt",
+    "shelterAddress": "Adresse",
+    "shelterDescription": "Kurze Beschreibung (optional)",
+    "shelterDescriptionPlaceholder": "Schreiben Sie ein paar Sätze über Ihr Tierheim...",
+    "shelterWebsite": "Webseite",
+    "shelterLogo": "Tierheim-Logo",
+    "phoneOptional": "Telefonnummer (optional)",
+    "createAccount": "Erstellen Sie Ihr Stork App-Konto",
+    "validation": {
+      "firstNameRequired": "Vorname ist erforderlich",
+      "lastNameRequired": "Nachname ist erforderlich",
+      "emailRequired": "E-Mail ist erforderlich",
+      "emailInvalid": "Ungültiges E-Mail-Format",
+      "passwordRequired": "Passwort ist erforderlich",
+      "passwordMinLength": "Passwort muss mindestens 6 Zeichen lang sein",
+      "passwordMismatch": "Passwörter stimmen nicht überein",
+      "shelterNameRequired": "Name des Tierheims ist erforderlich",
+      "shelterAddressRequired": "Adresse ist erforderlich",
+      "shelterCityRequired": "Stadt ist erforderlich"
+    }
   }
 }

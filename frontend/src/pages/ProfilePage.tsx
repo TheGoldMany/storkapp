@@ -12,12 +12,14 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { RootState, AppDispatch } from '../store/store'
 import { authAPI } from '../services/api'
 import { fetchUserProfile } from '../store/slices/authSlice'
 import ImageUpload from '../components/ImageUpload'
 
 const ProfilePage = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch<AppDispatch>()
   const { user } = useSelector((state: RootState) => state.auth)
   const [loading, setLoading] = useState(false)
@@ -95,7 +97,7 @@ const ProfilePage = () => {
       await dispatch(fetchUserProfile())
       setSuccess(true)
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba történt a profil frissítése során')
+      setError(err.response?.data?.message || t('common.error'))
     } finally {
       setLoading(false)
     }
@@ -105,12 +107,12 @@ const ProfilePage = () => {
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Profilom
+          {t('profile.title')}
         </Typography>
 
         {success && (
           <Alert severity="success" sx={{ mb: 3 }} onClose={() => setSuccess(false)}>
-            Profil sikeresen frissítve!
+            {t('profile.updated')}
           </Alert>
         )}
 
@@ -135,7 +137,7 @@ const ProfilePage = () => {
                 </Avatar>
               )}
               <Typography variant="subtitle2" gutterBottom>
-                Profilkép
+                {t('profile.avatar')}
               </Typography>
               <ImageUpload
                 value={formData.avatar}
@@ -148,7 +150,7 @@ const ProfilePage = () => {
             {/* Personal Information */}
             <Grid item xs={12}>
               <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                Személyes adatok
+                {t('profile.personalInfo')}
               </Typography>
             </Grid>
 
@@ -156,7 +158,7 @@ const ProfilePage = () => {
               <TextField
                 fullWidth
                 required
-                label="Keresztnév"
+                label={t('profile.firstName')}
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
@@ -167,7 +169,7 @@ const ProfilePage = () => {
               <TextField
                 fullWidth
                 required
-                label="Vezetéknév"
+                label={t('profile.lastName')}
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
@@ -178,17 +180,17 @@ const ProfilePage = () => {
               <TextField
                 fullWidth
                 disabled
-                label="Email"
+                label={t('profile.email')}
                 name="email"
                 value={formData.email}
-                helperText="Az email cím nem módosítható"
+                helperText={t('profile.emailNotEditable')}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Telefonszám"
+                label={t('profile.phone')}
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -201,7 +203,7 @@ const ProfilePage = () => {
               <>
                 <Grid item xs={12}>
                   <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-                    Menhely adatok
+                    {t('auth.shelterData')}
                   </Typography>
                 </Grid>
 
@@ -219,7 +221,7 @@ const ProfilePage = () => {
                     </Avatar>
                   )}
                   <Typography variant="subtitle2" gutterBottom>
-                    Menhely logó
+                    {t('auth.shelterLogo')}
                   </Typography>
                   <ImageUpload
                     value={formData.shelterLogo}
@@ -233,7 +235,7 @@ const ProfilePage = () => {
                   <TextField
                     fullWidth
                     required
-                    label="Menhely neve"
+                    label={t('auth.shelterName')}
                     name="shelterName"
                     value={formData.shelterName}
                     onChange={handleChange}
@@ -244,7 +246,7 @@ const ProfilePage = () => {
                   <TextField
                     fullWidth
                     required
-                    label="Város"
+                    label={t('auth.shelterCity')}
                     name="shelterCity"
                     value={formData.shelterCity}
                     onChange={handleChange}
@@ -255,7 +257,7 @@ const ProfilePage = () => {
                   <TextField
                     fullWidth
                     required
-                    label="Cím"
+                    label={t('auth.shelterAddress')}
                     name="shelterAddress"
                     value={formData.shelterAddress}
                     onChange={handleChange}
@@ -265,7 +267,7 @@ const ProfilePage = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
-                    label="Website"
+                    label={t('auth.shelterWebsite')}
                     name="shelterWebsite"
                     value={formData.shelterWebsite}
                     onChange={handleChange}
@@ -278,11 +280,11 @@ const ProfilePage = () => {
                     fullWidth
                     multiline
                     rows={4}
-                    label="Leírás"
+                    label={t('auth.shelterDescription')}
                     name="shelterDescription"
                     value={formData.shelterDescription}
                     onChange={handleChange}
-                    placeholder="Írj néhány mondatot a menhelyről..."
+                    placeholder={t('auth.shelterDescriptionPlaceholder')}
                   />
                 </Grid>
               </>
@@ -298,7 +300,7 @@ const ProfilePage = () => {
                   disabled={loading}
                   startIcon={loading ? <CircularProgress size={20} /> : null}
                 >
-                  {loading ? 'Mentés...' : 'Profil frissítése'}
+                  {loading ? t('common.loading') : t('profile.updateProfile')}
                 </Button>
               </Box>
             </Grid>
