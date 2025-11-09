@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../middleware/auth';
-import { asyncHandler } from '../middleware/asyncHandler';
-import { AppError } from '../middleware/errorHandler';
+import { asyncHandler, AppError } from '../middleware/errorHandler';
 
 // Upload single image
 export const uploadImage = asyncHandler(async (req: AuthRequest, res: Response) => {
