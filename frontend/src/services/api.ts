@@ -88,4 +88,28 @@ export const healthInfoAPI = {
   getHealthInfoById: (id: string) => api.get(`/health-info/${id}`),
 }
 
+// Upload API
+export const uploadAPI = {
+  uploadImage: (file: File) => {
+    const formData = new FormData()
+    formData.append('image', file)
+    return api.post('/upload/image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
+  uploadImages: (files: File[]) => {
+    const formData = new FormData()
+    files.forEach((file) => {
+      formData.append('images', file)
+    })
+    return api.post('/upload/images', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
+}
+
 export default api
