@@ -62,6 +62,7 @@ const DashboardPage = () => {
     neutered: false,
     microchipped: false,
     healthIssues: '',
+    status: 'AVAILABLE',
   })
 
   useEffect(() => {
@@ -108,6 +109,7 @@ const DashboardPage = () => {
         neutered: animal.neutered,
         microchipped: animal.microchipped,
         healthIssues: animal.healthIssues || '',
+        status: animal.status || 'AVAILABLE',
       })
     } else {
       setEditingAnimal(null)
@@ -127,6 +129,7 @@ const DashboardPage = () => {
         neutered: false,
         microchipped: false,
         healthIssues: '',
+        status: 'AVAILABLE',
       })
     }
     setOpenAnimalDialog(true)
@@ -532,6 +535,25 @@ const DashboardPage = () => {
                   onChange={handleAnimalFormChange}
                 />
               </Grid>
+              {editingAnimal && (
+                <Grid item xs={12} sm={4}>
+                  <TextField
+                    fullWidth
+                    select
+                    label="Státusz"
+                    name="status"
+                    value={animalForm.status}
+                    onChange={handleAnimalFormChange}
+                  >
+                    <MenuItem value="AVAILABLE">Elérhető</MenuItem>
+                    <MenuItem value="ADOPTED">Örökbefogadva</MenuItem>
+                    <MenuItem value="STRAY">Kóbor</MenuItem>
+                    <MenuItem value="RESERVED">Lefoglalva</MenuItem>
+                    <MenuItem value="MEDICAL_CARE">Kezelés alatt</MenuItem>
+                    <MenuItem value="NOT_AVAILABLE">Nem elérhető</MenuItem>
+                  </TextField>
+                </Grid>
+              )}
               <Grid item xs={12}>
                 <TextField
                   fullWidth
