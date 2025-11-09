@@ -32,6 +32,7 @@ import {
 } from '@mui/icons-material'
 import { RootState } from '../store/store'
 import { shelterAPI, animalAPI } from '../services/api'
+import ImageUpload from '../components/ImageUpload'
 
 const DashboardPage = () => {
   const { user } = useSelector((state: RootState) => state.auth)
@@ -50,10 +51,13 @@ const DashboardPage = () => {
     type: 'DOG',
     breed: '',
     age: '',
-    gender: 'male',
+    ageUnit: 'hónap',
+    gender: 'MALE',
     size: 'medium',
     color: '',
     description: '',
+    specialNeeds: '',
+    images: [] as string[],
     vaccinated: false,
     neutered: false,
     microchipped: false,
@@ -93,10 +97,13 @@ const DashboardPage = () => {
         type: animal.type,
         breed: animal.breed || '',
         age: animal.age?.toString() || '',
-        gender: animal.gender || 'male',
+        ageUnit: animal.ageUnit || 'hónap',
+        gender: animal.gender || 'MALE',
         size: animal.size || 'medium',
         color: animal.color || '',
         description: animal.description || '',
+        specialNeeds: animal.specialNeeds || '',
+        images: animal.images || [],
         vaccinated: animal.vaccinated,
         neutered: animal.neutered,
         microchipped: animal.microchipped,
@@ -109,10 +116,13 @@ const DashboardPage = () => {
         type: 'DOG',
         breed: '',
         age: '',
-        gender: 'male',
+        ageUnit: 'hónap',
+        gender: 'MALE',
         size: 'medium',
         color: '',
         description: '',
+        specialNeeds: '',
+        images: [],
         vaccinated: false,
         neutered: false,
         microchipped: false,
@@ -350,16 +360,22 @@ const DashboardPage = () => {
               <Grid item xs={12} sm={6} md={4} key={animal.id}>
                 <Card>
                   <CardMedia
-                    component="div"
                     sx={{
                       height: 200,
                       bgcolor: 'grey.200',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backgroundImage: animal.images?.length > 0
+                        ? `url(http://localhost:3000${animal.images[0]})`
+                        : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
                     }}
                   >
-                    <PetsIcon sx={{ fontSize: 80, color: 'grey.400' }} />
+                    {!animal.images?.length && (
+                      <PetsIcon sx={{ fontSize: 80, color: 'grey.400' }} />
+                    )}
                   </CardMedia>
                   <CardContent>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
@@ -371,7 +387,7 @@ const DashboardPage = () => {
                       />
                     </Box>
                     <Typography variant="body2" color="text.secondary">
-                      {animal.breed || 'Keverék'} • {animal.age ? `${animal.age} hónapos` : 'Ismeretlen kor'}
+                      {animal.breed || 'Keverék'} • {animal.age ? `${animal.age} ${animal.ageUnit || 'hónap'}` : 'Ismeretlen kor'}
                     </Typography>
                     <Typography variant="body2" sx={{ mt: 1 }}>
                       {animal.description?.substring(0, 100)}...
@@ -456,17 +472,31 @@ const DashboardPage = () => {
                   onChange={handleAnimalFormChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={4}>
                 <TextField
                   fullWidth
-                  label="Életkor (hónapokban)"
+                  label="Életkor"
                   name="age"
                   type="number"
                   value={animalForm.age}
                   onChange={handleAnimalFormChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={2}>
+                <TextField
+                  fullWidth
+                  select
+                  label="Egység"
+                  name="ageUnit"
+                  value={animalForm.ageUnit}
+                  onChange={handleAnimalFormChange}
+                >
+                  <MenuItem value="hét">hét</MenuItem>
+                  <MenuItem value="hónap">hónap</MenuItem>
+                  <MenuItem value="év">év</MenuItem>
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   select
@@ -475,9 +505,8 @@ const DashboardPage = () => {
                   value={animalForm.gender}
                   onChange={handleAnimalFormChange}
                 >
-                  <MenuItem value="male">Hím</MenuItem>
-                  <MenuItem value="female">Nőstény</MenuItem>
-                  <MenuItem value="unknown">Ismeretlen</MenuItem>
+                  <MenuItem value="MALE">Hím</MenuItem>
+                  <MenuItem value="FEMALE">Nőstény</MenuItem>
                 </TextField>
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -512,6 +541,29 @@ const DashboardPage = () => {
                   name="description"
                   value={animalForm.description}
                   onChange={handleAnimalFormChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={2}
+                  label="Különleges igények"
+                  name="specialNeeds"
+                  value={animalForm.specialNeeds}
+                  onChange={handleAnimalFormChange}
+                  placeholder="Allergiák, speciális táplálkozás, stb."
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Állat képei
+                </Typography>
+                <ImageUpload
+                  value={animalForm.images}
+                  onChange={(images) => setAnimalForm({ ...animalForm, images })}
+                  multiple
+                  maxImages={5}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
