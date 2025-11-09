@@ -32,7 +32,12 @@ class MatchResponse(BaseModel):
     imageSimScore: float
 
 
-@router.post("/lost-pet", response_model=List[MatchResponse])
+class MatchingStatusResponse(BaseModel):
+    status: str
+    message: str
+
+
+@router.post("/lost-pet", response_model=MatchingStatusResponse)
 async def match_lost_pet(
     request: LostPetMatchRequest,
     background_tasks: BackgroundTasks
@@ -56,7 +61,7 @@ async def match_lost_pet(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/found-pet", response_model=List[MatchResponse])
+@router.post("/found-pet", response_model=MatchingStatusResponse)
 async def match_found_pet(
     request: FoundPetMatchRequest,
     background_tasks: BackgroundTasks
