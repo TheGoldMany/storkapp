@@ -98,6 +98,14 @@
       "small": "Small",
       "medium": "Medium",
       "large": "Large"
+    },
+    "statuses": {
+      "AVAILABLE": "Available",
+      "ADOPTED": "Adopted",
+      "STRAY": "Stray",
+      "RESERVED": "Reserved",
+      "MEDICAL_CARE": "Medical Care",
+      "NOT_AVAILABLE": "Not Available"
     }
   },
   "lostPets": {
@@ -126,7 +134,13 @@
     "submit": "Submit Report",
     "error": "An error occurred while submitting the report",
     "unnamed": "Unnamed",
-    "rewardLabel": "Reward"
+    "rewardLabel": "Reward",
+    "statuses": {
+      "LOST": "Lost",
+      "REUNITED": "Reunited",
+      "FOUND": "Looking for Owner",
+      "CLOSED": "Closed"
+    }
   },
   "foundPets": {
     "title": "Found Pets",
@@ -152,7 +166,13 @@
     "finderEmail": "Contact Email",
     "submit": "Submit Report",
     "error": "An error occurred while submitting the report",
-    "temporaryLocationLabel": "Temporary location"
+    "temporaryLocationLabel": "Temporary location",
+    "statuses": {
+      "FOUND": "Looking for Owner",
+      "REUNITED": "Reunited with Owner",
+      "LOST": "Lost",
+      "CLOSED": "Closed"
+    }
   },
   "tips": {
     "title": "Tips and Advice",

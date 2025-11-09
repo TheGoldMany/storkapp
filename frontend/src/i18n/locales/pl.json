@@ -98,6 +98,14 @@
       "small": "Mały",
       "medium": "Średni",
       "large": "Duży"
+    },
+    "statuses": {
+      "AVAILABLE": "Dostępne",
+      "ADOPTED": "Adoptowane",
+      "STRAY": "Bezpańskie",
+      "RESERVED": "Zarezerwowane",
+      "MEDICAL_CARE": "Pod opieką weterynaryjną",
+      "NOT_AVAILABLE": "Niedostępne"
     }
   },
   "lostPets": {
@@ -126,7 +134,13 @@
     "submit": "Wyślij zgłoszenie",
     "error": "Wystąpił błąd podczas wysyłania zgłoszenia",
     "unnamed": "Bez nazwy",
-    "rewardLabel": "Nagroda"
+    "rewardLabel": "Nagroda",
+    "statuses": {
+      "LOST": "Zaginione",
+      "REUNITED": "Odnalezione",
+      "FOUND": "Szuka właściciela",
+      "CLOSED": "Zamknięte"
+    }
   },
   "foundPets": {
     "title": "Znalezione zwierzęta",
@@ -152,7 +166,13 @@
     "finderEmail": "Email kontaktowy",
     "submit": "Wyślij zgłoszenie",
     "error": "Wystąpił błąd podczas wysyłania zgłoszenia",
-    "temporaryLocationLabel": "Tymczasowa lokalizacja"
+    "temporaryLocationLabel": "Tymczasowa lokalizacja",
+    "statuses": {
+      "FOUND": "Szuka właściciela",
+      "REUNITED": "Połączono z właścicielem",
+      "LOST": "Zaginione",
+      "CLOSED": "Zamknięte"
+    }
   },
   "tips": {
     "title": "Porady i wskazówki",

@@ -98,6 +98,14 @@
       "small": "Kicsi",
       "medium": "Közepes",
       "large": "Nagy"
+    },
+    "statuses": {
+      "AVAILABLE": "Elérhető",
+      "ADOPTED": "Örökbefogadva",
+      "STRAY": "Kóbor",
+      "RESERVED": "Lefoglalva",
+      "MEDICAL_CARE": "Kezelés alatt",
+      "NOT_AVAILABLE": "Nem elérhető"
     }
   },
   "lostPets": {
@@ -126,7 +134,13 @@
     "submit": "Bejelentés elküldése",
     "error": "Hiba történt a bejelentés során",
     "unnamed": "Névtelen",
-    "rewardLabel": "Jutalom"
+    "rewardLabel": "Jutalom",
+    "statuses": {
+      "LOST": "Elveszett",
+      "REUNITED": "Megtalált",
+      "FOUND": "Gazdáját keresi",
+      "CLOSED": "Lezárt"
+    }
   },
   "foundPets": {
     "title": "Talált állatok",
@@ -152,7 +166,13 @@
     "finderEmail": "Kapcsolattartói email",
     "submit": "Bejelentés elküldése",
     "error": "Hiba történt a bejelentés során",
-    "temporaryLocationLabel": "Ideiglenes tartózkodási hely"
+    "temporaryLocationLabel": "Ideiglenes tartózkodási hely",
+    "statuses": {
+      "FOUND": "Gazdáját keresi",
+      "REUNITED": "Megtalálta gazdáját",
+      "LOST": "Elveszett",
+      "CLOSED": "Lezárt"
+    }
   },
   "tips": {
     "title": "Tanácsok és tippek",

@@ -98,6 +98,14 @@
       "small": "Klein",
       "medium": "Mittel",
       "large": "Groß"
+    },
+    "statuses": {
+      "AVAILABLE": "Verfügbar",
+      "ADOPTED": "Adoptiert",
+      "STRAY": "Streunend",
+      "RESERVED": "Reserviert",
+      "MEDICAL_CARE": "In Behandlung",
+      "NOT_AVAILABLE": "Nicht verfügbar"
     }
   },
   "lostPets": {
@@ -126,7 +134,13 @@
     "submit": "Meldung absenden",
     "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten",
     "unnamed": "Namenlos",
-    "rewardLabel": "Belohnung"
+    "rewardLabel": "Belohnung",
+    "statuses": {
+      "LOST": "Vermisst",
+      "REUNITED": "Wiedervereint",
+      "FOUND": "Sucht Besitzer",
+      "CLOSED": "Geschlossen"
+    }
   },
   "foundPets": {
     "title": "Gefundene Tiere",
@@ -152,7 +166,13 @@
     "finderEmail": "Kontakt-E-Mail",
     "submit": "Meldung absenden",
     "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten",
-    "temporaryLocationLabel": "Vorübergehender Standort"
+    "temporaryLocationLabel": "Vorübergehender Standort",
+    "statuses": {
+      "FOUND": "Sucht Besitzer",
+      "REUNITED": "Mit Besitzer wiedervereint",
+      "LOST": "Vermisst",
+      "CLOSED": "Geschlossen"
+    }
   },
   "tips": {
     "title": "Tipps und Ratschläge",
