@@ -16,7 +16,7 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
     throw new AppError('Validation failed', 400);
   }
 
-  const { email, password, firstName, lastName, phone, role } = req.body;
+  const { email, password, firstName, lastName, phone, role, shelter } = req.body;
 
   // Check if user exists
   const existingUser = await prisma.user.findUnique({ where: { email } });
@@ -31,7 +31,7 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
   const verificationToken = crypto.randomBytes(32).toString('hex');
   const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-  // Create user
+  // Create user (and shelter if role is SHELTER_ADMIN)
   const user = await prisma.user.create({
     data: {
       email,
@@ -42,6 +42,21 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
       role: role || 'USER',
       verificationToken,
       verificationTokenExpires,
+      // Create shelter if registering as shelter admin
+      ...(role === 'SHELTER_ADMIN' && shelter && {
+        shelter: {
+          create: {
+            name: shelter.name,
+            description: shelter.description || null,
+            email: shelter.email || email,
+            phone: shelter.phone || phone || '',
+            address: shelter.address,
+            city: shelter.city,
+            country: shelter.country || 'Hungary',
+            postalCode: shelter.postalCode || null,
+          },
+        },
+      }),
     },
     select: {
       id: true,
@@ -50,6 +65,7 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
       lastName: true,
       role: true,
       verified: true,
+      shelter: true,
     },
   });
 
@@ -140,15 +156,16 @@ export const getProfile = asyncHandler(async (req: AuthRequest, res: Response) =
 });
 
 export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response) => {
-  const { firstName, lastName, phone, avatar } = req.body;
+  const { firstName, lastName, phone, avatar, shelter } = req.body;
 
+  // Update user data
   const user = await prisma.user.update({
     where: { id: req.user!.id },
     data: {
       ...(firstName && { firstName }),
       ...(lastName && { lastName }),
       ...(phone && { phone }),
-      ...(avatar && { avatar }),
+      ...(avatar !== undefined && { avatar }),
     },
     select: {
       id: true,
@@ -158,8 +175,46 @@ export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response
       phone: true,
       role: true,
       avatar: true,
+      shelter: true,
     },
   });
+
+  // Update shelter data if user is shelter admin and shelter data provided
+  if (user.role === 'SHELTER_ADMIN' && shelter && user.shelter) {
+    await prisma.shelter.update({
+      where: { id: user.shelter.id },
+      data: {
+        ...(shelter.name && { name: shelter.name }),
+        ...(shelter.description !== undefined && { description: shelter.description }),
+        ...(shelter.address && { address: shelter.address }),
+        ...(shelter.city && { city: shelter.city }),
+        ...(shelter.phone && { phone: shelter.phone }),
+        ...(shelter.email && { email: shelter.email }),
+        ...(shelter.logo !== undefined && { logo: shelter.logo }),
+        ...(shelter.website !== undefined && { website: shelter.website }),
+      },
+    });
+
+    // Fetch updated user with shelter
+    const updatedUser = await prisma.user.findUnique({
+      where: { id: req.user!.id },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        role: true,
+        avatar: true,
+        shelter: true,
+      },
+    });
+
+    return res.json({
+      status: 'success',
+      data: { user: updatedUser },
+    });
+  }
 
   res.json({
     status: 'success',

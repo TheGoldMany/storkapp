@@ -30,6 +30,13 @@ const ProfilePage = () => {
     email: '',
     phone: '',
     avatar: [] as string[],
+    // Shelter fields
+    shelterName: '',
+    shelterAddress: '',
+    shelterCity: '',
+    shelterDescription: '',
+    shelterLogo: [] as string[],
+    shelterWebsite: '',
   })
 
   useEffect(() => {
@@ -40,6 +47,13 @@ const ProfilePage = () => {
         email: user.email || '',
         phone: user.phone || '',
         avatar: user.avatar ? [user.avatar] : [],
+        // Shelter fields
+        shelterName: user.shelter?.name || '',
+        shelterAddress: user.shelter?.address || '',
+        shelterCity: user.shelter?.city || '',
+        shelterDescription: user.shelter?.description || '',
+        shelterLogo: user.shelter?.logo ? [user.shelter.logo] : [],
+        shelterWebsite: user.shelter?.website || '',
       })
     }
   }, [user])
@@ -56,12 +70,26 @@ const ProfilePage = () => {
     setLoading(true)
 
     try {
-      await authAPI.updateProfile({
+      const profileData: any = {
         firstName: formData.firstName,
         lastName: formData.lastName,
         phone: formData.phone,
         avatar: formData.avatar[0] || null,
-      })
+      }
+
+      // Add shelter data if user is shelter admin
+      if (user?.role === 'SHELTER_ADMIN' && user.shelter) {
+        profileData.shelter = {
+          name: formData.shelterName,
+          address: formData.shelterAddress,
+          city: formData.shelterCity,
+          description: formData.shelterDescription,
+          logo: formData.shelterLogo[0] || null,
+          website: formData.shelterWebsite || null,
+        }
+      }
+
+      await authAPI.updateProfile(profileData)
 
       // Refresh user profile
       await dispatch(fetchUserProfile())
@@ -167,6 +195,98 @@ const ProfilePage = () => {
                 placeholder="+36 20 123 4567"
               />
             </Grid>
+
+            {/* Shelter Information - Only for Shelter Admins */}
+            {user?.role === 'SHELTER_ADMIN' && user.shelter && (
+              <>
+                <Grid item xs={12}>
+                  <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+                    Menhely adatok
+                  </Typography>
+                </Grid>
+
+                {/* Shelter Logo */}
+                <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  {formData.shelterLogo.length > 0 ? (
+                    <Avatar
+                      src={`http://localhost:3000${formData.shelterLogo[0]}`}
+                      sx={{ width: 120, height: 120, mb: 2 }}
+                      variant="rounded"
+                    />
+                  ) : (
+                    <Avatar sx={{ width: 120, height: 120, mb: 2 }} variant="rounded">
+                      {formData.shelterName.charAt(0)}
+                    </Avatar>
+                  )}
+                  <Typography variant="subtitle2" gutterBottom>
+                    Menhely logó
+                  </Typography>
+                  <ImageUpload
+                    value={formData.shelterLogo}
+                    onChange={(images) => setFormData({ ...formData, shelterLogo: images })}
+                    multiple={false}
+                    maxImages={1}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    required
+                    label="Menhely neve"
+                    name="shelterName"
+                    value={formData.shelterName}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    required
+                    label="Város"
+                    name="shelterCity"
+                    value={formData.shelterCity}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    required
+                    label="Cím"
+                    name="shelterAddress"
+                    value={formData.shelterAddress}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Website"
+                    name="shelterWebsite"
+                    value={formData.shelterWebsite}
+                    onChange={handleChange}
+                    placeholder="https://..."
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={4}
+                    label="Leírás"
+                    name="shelterDescription"
+                    value={formData.shelterDescription}
+                    onChange={handleChange}
+                    placeholder="Írj néhány mondatot a menhelyről..."
+                  />
+                </Grid>
+              </>
+            )}
 
             {/* Submit Button */}
             <Grid item xs={12}>

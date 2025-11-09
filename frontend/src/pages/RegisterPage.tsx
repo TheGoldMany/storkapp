@@ -13,8 +13,17 @@ import {
   InputAdornment,
   IconButton,
   Grid,
+  ToggleButton,
+  ToggleButtonGroup,
+  Divider,
 } from '@mui/material'
-import { Visibility, VisibilityOff, PersonAdd as PersonAddIcon } from '@mui/icons-material'
+import {
+  Visibility,
+  VisibilityOff,
+  PersonAdd as PersonAddIcon,
+  Person as PersonIcon,
+  Business as BusinessIcon,
+} from '@mui/icons-material'
 import { registerUser, clearError } from '../store/slices/authSlice'
 import { AppDispatch, RootState } from '../store/store'
 
@@ -23,6 +32,7 @@ const RegisterPage = () => {
   const navigate = useNavigate()
   const { isAuthenticated, loading, error } = useSelector((state: RootState) => state.auth)
 
+  const [accountType, setAccountType] = useState<'USER' | 'SHELTER_ADMIN'>('USER')
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -30,6 +40,11 @@ const RegisterPage = () => {
     password: '',
     confirmPassword: '',
     phone: '',
+    // Shelter fields
+    shelterName: '',
+    shelterAddress: '',
+    shelterCity: '',
+    shelterDescription: '',
   })
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
@@ -87,6 +102,19 @@ const RegisterPage = () => {
       errors.confirmPassword = 'A jelszavak nem egyeznek'
     }
 
+    // Shelter-specific validation
+    if (accountType === 'SHELTER_ADMIN') {
+      if (!formData.shelterName.trim()) {
+        errors.shelterName = 'Menhely neve kötelező'
+      }
+      if (!formData.shelterAddress.trim()) {
+        errors.shelterAddress = 'Cím megadása kötelező'
+      }
+      if (!formData.shelterCity.trim()) {
+        errors.shelterCity = 'Város megadása kötelező'
+      }
+    }
+
     setValidationErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -98,7 +126,26 @@ const RegisterPage = () => {
       return
     }
 
-    const { confirmPassword, ...registerData } = formData
+    const { confirmPassword, shelterName, shelterAddress, shelterCity, shelterDescription, ...baseData } = formData
+
+    const registerData: any = {
+      ...baseData,
+      role: accountType,
+    }
+
+    // Add shelter data if registering as shelter admin
+    if (accountType === 'SHELTER_ADMIN') {
+      registerData.shelter = {
+        name: shelterName,
+        address: shelterAddress,
+        city: shelterCity,
+        description: shelterDescription || null,
+        email: formData.email,
+        phone: formData.phone || '',
+        country: 'Hungary',
+      }
+    }
+
     await dispatch(registerUser(registerData))
   }
 
@@ -127,6 +174,27 @@ const RegisterPage = () => {
           )}
 
           <Box component="form" onSubmit={handleSubmit} noValidate>
+            {/* Account Type Selection */}
+            <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
+              <ToggleButtonGroup
+                value={accountType}
+                exclusive
+                onChange={(_, newType) => newType && setAccountType(newType)}
+                color="primary"
+                fullWidth
+                sx={{ maxWidth: 400 }}
+              >
+                <ToggleButton value="USER">
+                  <PersonIcon sx={{ mr: 1 }} />
+                  Magánszemély
+                </ToggleButton>
+                <ToggleButton value="SHELTER_ADMIN">
+                  <BusinessIcon sx={{ mr: 1 }} />
+                  Menhely
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -187,6 +255,78 @@ const RegisterPage = () => {
               onChange={handleChange}
               disabled={loading}
             />
+
+            {/* Shelter-specific fields */}
+            {accountType === 'SHELTER_ADMIN' && (
+              <>
+                <Divider sx={{ my: 3 }}>
+                  <Typography variant="body2" color="text.secondary">
+                    Menhely adatok
+                  </Typography>
+                </Divider>
+
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="shelterName"
+                  label="Menhely neve"
+                  name="shelterName"
+                  value={formData.shelterName}
+                  onChange={handleChange}
+                  disabled={loading}
+                  error={!!validationErrors.shelterName}
+                  helperText={validationErrors.shelterName}
+                />
+
+                <Grid container spacing={2} sx={{ mt: 1 }}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="shelterCity"
+                      label="Város"
+                      name="shelterCity"
+                      value={formData.shelterCity}
+                      onChange={handleChange}
+                      disabled={loading}
+                      error={!!validationErrors.shelterCity}
+                      helperText={validationErrors.shelterCity}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="shelterAddress"
+                      label="Cím"
+                      name="shelterAddress"
+                      value={formData.shelterAddress}
+                      onChange={handleChange}
+                      disabled={loading}
+                      error={!!validationErrors.shelterAddress}
+                      helperText={validationErrors.shelterAddress}
+                    />
+                  </Grid>
+                </Grid>
+
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  multiline
+                  rows={3}
+                  id="shelterDescription"
+                  label="Rövid leírás (opcionális)"
+                  name="shelterDescription"
+                  value={formData.shelterDescription}
+                  onChange={handleChange}
+                  disabled={loading}
+                  placeholder="Írj néhány mondatot a menhelyről..."
+                />
+
+                <Divider sx={{ my: 3 }} />
+              </>
+            )}
 
             <TextField
               margin="normal"
