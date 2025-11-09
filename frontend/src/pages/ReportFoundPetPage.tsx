@@ -22,15 +22,17 @@ const ReportFoundPetPage = () => {
     type: 'DOG',
     breed: '',
     color: '',
-    approximateAge: '',
+    age: '',
     gender: 'MALE',
     description: '',
     images: [] as string[],
     foundLocation: '',
+    foundCity: '',
     foundDate: new Date().toISOString().split('T')[0],
-    temporaryLocation: '',
-    contactPhone: '',
-    contactEmail: '',
+    currentLocation: '',
+    finderName: '',
+    finderPhone: '',
+    finderEmail: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,7 +46,11 @@ const ReportFoundPetPage = () => {
     setLoading(true)
 
     try {
-      await foundPetAPI.createFoundPet(formData)
+      const submitData = {
+        ...formData,
+        age: formData.age ? parseInt(formData.age) : undefined,
+      }
+      await foundPetAPI.createFoundPet(submitData)
       navigate('/found-pets')
     } catch (err: any) {
       setError(err.response?.data?.message || 'Hiba t�rt�nt a bejelent�s sor�n')
@@ -140,11 +146,12 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Becs�lt kor"
-                name="approximateAge"
-                value={formData.approximateAge}
+                type="number"
+                label="Becsült kor (év)"
+                name="age"
+                value={formData.age}
                 onChange={handleChange}
-                placeholder="Pl. fiatal, felnQtt, idQs / 2-3 �v k�r�li"
+                placeholder="Pl. 2"
               />
             </Grid>
 
@@ -177,6 +184,18 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
+                label="Város"
+                name="foundCity"
+                value={formData.foundCity}
+                onChange={handleChange}
+                required
+                placeholder="Pl. Budapest"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
                 label="Hol tal�ltad?"
                 name="foundLocation"
                 value={formData.foundLocation}
@@ -199,14 +218,26 @@ const ReportFoundPetPage = () => {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 label="Ideiglenes tart�zkod�si hely"
-                name="temporaryLocation"
-                value={formData.temporaryLocation}
+                name="currentLocation"
+                value={formData.currentLocation}
                 onChange={handleChange}
-                placeholder="Hol van jelenleg az �llat? (otthon, menhely, �llatorvos, stb.)"
+                placeholder="Hol van jelenleg az �llat?"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Megtaláló neve"
+                name="finderName"
+                value={formData.finderName}
+                onChange={handleChange}
+                required
+                placeholder="Teljes név"
               />
             </Grid>
 
@@ -214,8 +245,8 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 label="Kapcsolattart�i telefon"
-                name="contactPhone"
-                value={formData.contactPhone}
+                name="finderPhone"
+                value={formData.finderPhone}
                 onChange={handleChange}
                 required
                 placeholder="+36 20 123 4567"
@@ -227,10 +258,9 @@ const ReportFoundPetPage = () => {
                 fullWidth
                 type="email"
                 label="Kapcsolattart�i email"
-                name="contactEmail"
-                value={formData.contactEmail}
+                name="finderEmail"
+                value={formData.finderEmail}
                 onChange={handleChange}
-                required
                 placeholder="email@example.com"
               />
             </Grid>

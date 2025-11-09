@@ -28,7 +28,9 @@ const ReportLostPetPage = () => {
     description: '',
     images: [] as string[],
     lastSeenLocation: '',
+    lastSeenCity: '',
     lastSeenDate: new Date().toISOString().split('T')[0],
+    contactName: '',
     contactPhone: '',
     contactEmail: '',
     reward: '',
@@ -193,6 +195,18 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
+                label="Város"
+                name="lastSeenCity"
+                value={formData.lastSeenCity}
+                onChange={handleChange}
+                required
+                placeholder="Pl. Budapest"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
                 label="Utolj�ra l�tott helysz�n"
                 name="lastSeenLocation"
                 value={formData.lastSeenLocation}
@@ -212,6 +226,18 @@ const ReportLostPetPage = () => {
                 onChange={handleChange}
                 required
                 InputLabelProps={{ shrink: true }}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Kapcsolattartó neve"
+                name="contactName"
+                value={formData.contactName}
+                onChange={handleChange}
+                required
+                placeholder="Teljes név"
               />
             </Grid>
 
