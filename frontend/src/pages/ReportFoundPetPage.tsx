@@ -53,7 +53,7 @@ const ReportFoundPetPage = () => {
       await foundPetAPI.createFoundPet(submitData)
       navigate('/found-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba t�rt�nt a bejelent�s sor�n')
+      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
     } finally {
       setLoading(false)
     }
@@ -66,15 +66,15 @@ const ReportFoundPetPage = () => {
         onClick={() => navigate('/found-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza a tal�lt �llatokhoz
+        Vissza a talált állatokhoz
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Tal�lt �llat bejelent�se
+          Talált állat bejelentése
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          Ha tal�lt�l egy �llatot, t�ltsd ki az al�bbi qrlapot, hogy seg�thess�nk visszajuttatni gazd�j�hoz.
+          Ha találtál egy állatot, töltsd ki az alábbi űrlapot, hogy segíthessünk visszajuttatni gazdájához.
         </Typography>
 
         {error && (
@@ -89,7 +89,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="T�pus"
+                label="Típus"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -98,9 +98,9 @@ const ReportFoundPetPage = () => {
               >
                 <option value="DOG">Kutya</option>
                 <option value="CAT">Macska</option>
-                <option value="BIRD">Mad�r</option>
-                <option value="RABBIT">Ny�l</option>
-                <option value="OTHER">Egy�b</option>
+                <option value="BIRD">Madár</option>
+                <option value="RABBIT">Nyúl</option>
+                <option value="OTHER">Egyéb</option>
               </TextField>
             </Grid>
 
@@ -118,12 +118,12 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Sz�n"
+                label="Szín"
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
                 required
-                placeholder="Pl. barna �s feh�r"
+                placeholder="Pl. barna és fehér"
               />
             </Grid>
 
@@ -138,8 +138,8 @@ const ReportFoundPetPage = () => {
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">H�m</option>
-                <option value="FEMALE">NQst�ny</option>
+                <option value="MALE">Hím</option>
+                <option value="FEMALE">Nőstény</option>
               </TextField>
             </Grid>
 
@@ -196,12 +196,12 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Hol tal�ltad?"
+                label="Hol találtad?"
                 name="foundLocation"
                 value={formData.foundLocation}
                 onChange={handleChange}
                 required
-                placeholder="Pontos c�m vagy k�rny�k"
+                placeholder="Pontos cím vagy környék"
               />
             </Grid>
 
@@ -209,7 +209,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Mikor tal�ltad?"
+                label="Mikor találtad?"
                 name="foundDate"
                 value={formData.foundDate}
                 onChange={handleChange}
@@ -221,11 +221,11 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Ideiglenes tart�zkod�si hely"
+                label="Ideiglenes tartózkodási hely"
                 name="currentLocation"
                 value={formData.currentLocation}
                 onChange={handleChange}
-                placeholder="Hol van jelenleg az �llat?"
+                placeholder="Hol van jelenleg az állat?"
               />
             </Grid>
 
@@ -244,7 +244,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattart�i telefon"
+                label="Kapcsolattartói telefon"
                 name="finderPhone"
                 value={formData.finderPhone}
                 onChange={handleChange}
@@ -257,7 +257,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattart�i email"
+                label="Kapcsolattartói email"
                 name="finderEmail"
                 value={formData.finderEmail}
                 onChange={handleChange}
@@ -272,7 +272,7 @@ const ReportFoundPetPage = () => {
                   onClick={() => navigate('/found-pets')}
                   disabled={loading}
                 >
-                  M�gse
+                  Mégse
                 </Button>
                 <Button
                   type="submit"
@@ -280,7 +280,7 @@ const ReportFoundPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Ment�s...' : 'Bejelent�s elk�ld�se'}
+                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
                 </Button>
               </Box>
             </Grid>

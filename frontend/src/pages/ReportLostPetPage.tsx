@@ -55,7 +55,7 @@ const ReportLostPetPage = () => {
       await lostPetAPI.createLostPet(submitData)
       navigate('/lost-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba t�rt�nt a bejelent�s sor�n')
+      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
     } finally {
       setLoading(false)
     }
@@ -68,15 +68,15 @@ const ReportLostPetPage = () => {
         onClick={() => navigate('/lost-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza az elveszett �llatokhoz
+        Vissza az elveszett állatokhoz
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Elveszett �llat bejelent�se
+          Elveszett állat bejelentése
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          T�ltsd ki az al�bbi qrlapot, hogy seg�thess�nk megtal�lni elveszett kedvencedet.
+          Töltsd ki az alábbi űrlapot, hogy segíthessünk megtalálni elveszett kedvencedet.
         </Typography>
 
         {error && (
@@ -90,7 +90,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="�llat neve"
+                label="Állat neve"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -102,7 +102,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="T�pus"
+                label="Típus"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -111,9 +111,9 @@ const ReportLostPetPage = () => {
               >
                 <option value="DOG">Kutya</option>
                 <option value="CAT">Macska</option>
-                <option value="BIRD">Mad�r</option>
-                <option value="RABBIT">Ny�l</option>
-                <option value="OTHER">Egy�b</option>
+                <option value="BIRD">Madár</option>
+                <option value="RABBIT">Nyúl</option>
+                <option value="OTHER">Egyéb</option>
               </TextField>
             </Grid>
 
@@ -131,11 +131,11 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Sz�n"
+                label="Szín"
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
-                placeholder="Pl. barna �s feh�r"
+                placeholder="Pl. barna és fehér"
               />
             </Grid>
 
@@ -150,8 +150,8 @@ const ReportLostPetPage = () => {
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">H�m</option>
-                <option value="FEMALE">NQst�ny</option>
+                <option value="MALE">Hím</option>
+                <option value="FEMALE">Nőstény</option>
               </TextField>
             </Grid>
 
@@ -159,7 +159,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Kor (�v)"
+                label="Kor (év)"
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
@@ -207,12 +207,12 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Utolj�ra l�tott helysz�n"
+                label="Utoljára látott helyszín"
                 name="lastSeenLocation"
                 value={formData.lastSeenLocation}
                 onChange={handleChange}
                 required
-                placeholder="Pontos c�m vagy k�rny�k"
+                placeholder="Pontos cím vagy környék"
               />
             </Grid>
 
@@ -220,7 +220,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Utolj�ra l�tva d�tuma"
+                label="Utoljára látva dátuma"
                 name="lastSeenDate"
                 value={formData.lastSeenDate}
                 onChange={handleChange}
@@ -244,7 +244,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattart�i telefon"
+                label="Kapcsolattartói telefon"
                 name="contactPhone"
                 value={formData.contactPhone}
                 onChange={handleChange}
@@ -257,7 +257,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattart�i email"
+                label="Kapcsolattartói email"
                 name="contactEmail"
                 value={formData.contactEmail}
                 onChange={handleChange}
@@ -270,7 +270,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Jutalom (opcion�lis, Ft-ban)"
+                label="Jutalom (opcionális, Ft-ban)"
                 name="reward"
                 value={formData.reward}
                 onChange={handleChange}
@@ -285,7 +285,7 @@ const ReportLostPetPage = () => {
                   onClick={() => navigate('/lost-pets')}
                   disabled={loading}
                 >
-                  M�gse
+                  Mégse
                 </Button>
                 <Button
                   type="submit"
@@ -293,7 +293,7 @@ const ReportLostPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Ment�s...' : 'Bejelent�s elk�ld�se'}
+                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
                 </Button>
               </Box>
             </Grid>
