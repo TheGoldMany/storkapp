@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { authRouter } from './routes/auth.routes';
 import { shelterRouter } from './routes/shelter.routes';
 import { animalRouter } from './routes/animal.routes';
@@ -10,6 +11,7 @@ import { subscriptionRouter } from './routes/subscription.routes';
 import { donationRouter } from './routes/donation.routes';
 import { healthInfoRouter } from './routes/healthInfo.routes';
 import { matchRouter } from './routes/match.routes';
+import { uploadRouter } from './routes/upload.routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './utils/logger';
 
@@ -25,6 +27,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded files statically
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Request logging
 app.use((req, _res, next) => {
@@ -69,6 +74,7 @@ app.use('/api/subscriptions', subscriptionRouter);
 app.use('/api/donations', donationRouter);
 app.use('/api/health-info', healthInfoRouter);
 app.use('/api/matches', matchRouter);
+app.use('/api/upload', uploadRouter);
 
 // Error handling
 app.use(errorHandler);

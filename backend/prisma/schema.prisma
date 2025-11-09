@@ -122,13 +122,15 @@ model Animal {
   name            String
   type            AnimalType
   breed           String?
-  age             Int?          // hónapokban
-  gender          String?       // "male", "female", "unknown"
+  age             Int?          // age number
+  ageUnit         String?       // "hét", "hónap", "év"
+  gender          String?       // "MALE", "FEMALE"
   size            String?       // "small", "medium", "large"
   color           String?
   description     String?       @db.Text
+  specialNeeds    String?       @db.Text
 
-  images          String[]      // S3 URLs
+  images          String[]      // Image URLs
 
   status          AnimalStatus  @default(AVAILABLE)
 
