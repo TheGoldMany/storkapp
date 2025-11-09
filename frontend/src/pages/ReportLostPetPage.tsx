@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { lostPetAPI } from '../services/api'
+import ImageUpload from '../components/ImageUpload'
 
 const ReportLostPetPage = () => {
   const navigate = useNavigate()
@@ -25,6 +26,7 @@ const ReportLostPetPage = () => {
     age: '',
     gender: 'MALE',
     description: '',
+    images: [] as string[],
     lastSeenLocation: '',
     lastSeenDate: new Date().toISOString().split('T')[0],
     contactPhone: '',
@@ -51,7 +53,7 @@ const ReportLostPetPage = () => {
       await lostPetAPI.createLostPet(submitData)
       navigate('/lost-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
+      setError(err.response?.data?.message || 'Hiba tï¿½rtï¿½nt a bejelentï¿½s sorï¿½n')
     } finally {
       setLoading(false)
     }
@@ -64,15 +66,15 @@ const ReportLostPetPage = () => {
         onClick={() => navigate('/lost-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza az elveszett állatokhoz
+        Vissza az elveszett ï¿½llatokhoz
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Elveszett állat bejelentése
+          Elveszett ï¿½llat bejelentï¿½se
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          Töltsd ki az alábbi qrlapot, hogy segíthessünk megtalálni elveszett kedvencedet.
+          Tï¿½ltsd ki az alï¿½bbi qrlapot, hogy segï¿½thessï¿½nk megtalï¿½lni elveszett kedvencedet.
         </Typography>
 
         {error && (
@@ -86,7 +88,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Állat neve"
+                label="ï¿½llat neve"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -98,7 +100,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Típus"
+                label="Tï¿½pus"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -107,9 +109,9 @@ const ReportLostPetPage = () => {
               >
                 <option value="DOG">Kutya</option>
                 <option value="CAT">Macska</option>
-                <option value="BIRD">Madár</option>
-                <option value="RABBIT">Nyúl</option>
-                <option value="OTHER">Egyéb</option>
+                <option value="BIRD">Madï¿½r</option>
+                <option value="RABBIT">Nyï¿½l</option>
+                <option value="OTHER">Egyï¿½b</option>
               </TextField>
             </Grid>
 
@@ -127,11 +129,11 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Szín"
+                label="Szï¿½n"
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
-                placeholder="Pl. barna és fehér"
+                placeholder="Pl. barna ï¿½s fehï¿½r"
               />
             </Grid>
 
@@ -146,8 +148,8 @@ const ReportLostPetPage = () => {
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">Hím</option>
-                <option value="FEMALE">NQstény</option>
+                <option value="MALE">Hï¿½m</option>
+                <option value="FEMALE">NQstï¿½ny</option>
               </TextField>
             </Grid>
 
@@ -155,7 +157,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Kor (év)"
+                label="Kor (ï¿½v)"
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
@@ -168,23 +170,35 @@ const ReportLostPetPage = () => {
                 fullWidth
                 multiline
                 rows={4}
-                label="Leírás"
+                label="LeÃ­rÃ¡s"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                placeholder="Különleges jegyek, viselkedés, stb."
+                placeholder="KÃ¼lÃ¶nleges jegyek, viselkedÃ©s, stb."
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle2" gutterBottom>
+                FÃ©nykÃ©pek az Ã¡llatrÃ³l
+              </Typography>
+              <ImageUpload
+                value={formData.images}
+                onChange={(images) => setFormData({ ...formData, images })}
+                multiple
+                maxImages={5}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Utoljára látott helyszín"
+                label="Utoljï¿½ra lï¿½tott helyszï¿½n"
                 name="lastSeenLocation"
                 value={formData.lastSeenLocation}
                 onChange={handleChange}
                 required
-                placeholder="Pontos cím vagy környék"
+                placeholder="Pontos cï¿½m vagy kï¿½rnyï¿½k"
               />
             </Grid>
 
@@ -192,7 +206,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Utoljára látva dátuma"
+                label="Utoljï¿½ra lï¿½tva dï¿½tuma"
                 name="lastSeenDate"
                 value={formData.lastSeenDate}
                 onChange={handleChange}
@@ -204,7 +218,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattartói telefon"
+                label="Kapcsolattartï¿½i telefon"
                 name="contactPhone"
                 value={formData.contactPhone}
                 onChange={handleChange}
@@ -217,7 +231,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattartói email"
+                label="Kapcsolattartï¿½i email"
                 name="contactEmail"
                 value={formData.contactEmail}
                 onChange={handleChange}
@@ -230,7 +244,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Jutalom (opcionális, Ft-ban)"
+                label="Jutalom (opcionï¿½lis, Ft-ban)"
                 name="reward"
                 value={formData.reward}
                 onChange={handleChange}
@@ -245,7 +259,7 @@ const ReportLostPetPage = () => {
                   onClick={() => navigate('/lost-pets')}
                   disabled={loading}
                 >
-                  Mégse
+                  Mï¿½gse
                 </Button>
                 <Button
                   type="submit"
@@ -253,7 +267,7 @@ const ReportLostPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
+                  {loading ? 'Mentï¿½s...' : 'Bejelentï¿½s elkï¿½ldï¿½se'}
                 </Button>
               </Box>
             </Grid>

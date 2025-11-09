@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { foundPetAPI } from '../services/api'
+import ImageUpload from '../components/ImageUpload'
 
 const ReportFoundPetPage = () => {
   const navigate = useNavigate()
@@ -24,6 +25,7 @@ const ReportFoundPetPage = () => {
     approximateAge: '',
     gender: 'MALE',
     description: '',
+    images: [] as string[],
     foundLocation: '',
     foundDate: new Date().toISOString().split('T')[0],
     temporaryLocation: '',
@@ -45,7 +47,7 @@ const ReportFoundPetPage = () => {
       await foundPetAPI.createFoundPet(formData)
       navigate('/found-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
+      setError(err.response?.data?.message || 'Hiba tï¿½rtï¿½nt a bejelentï¿½s sorï¿½n')
     } finally {
       setLoading(false)
     }
@@ -58,15 +60,15 @@ const ReportFoundPetPage = () => {
         onClick={() => navigate('/found-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza a talált állatokhoz
+        Vissza a talï¿½lt ï¿½llatokhoz
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Talált állat bejelentése
+          Talï¿½lt ï¿½llat bejelentï¿½se
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          Ha találtál egy állatot, töltsd ki az alábbi qrlapot, hogy segíthessünk visszajuttatni gazdájához.
+          Ha talï¿½ltï¿½l egy ï¿½llatot, tï¿½ltsd ki az alï¿½bbi qrlapot, hogy segï¿½thessï¿½nk visszajuttatni gazdï¿½jï¿½hoz.
         </Typography>
 
         {error && (
@@ -81,7 +83,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Típus"
+                label="Tï¿½pus"
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
@@ -90,9 +92,9 @@ const ReportFoundPetPage = () => {
               >
                 <option value="DOG">Kutya</option>
                 <option value="CAT">Macska</option>
-                <option value="BIRD">Madár</option>
-                <option value="RABBIT">Nyúl</option>
-                <option value="OTHER">Egyéb</option>
+                <option value="BIRD">Madï¿½r</option>
+                <option value="RABBIT">Nyï¿½l</option>
+                <option value="OTHER">Egyï¿½b</option>
               </TextField>
             </Grid>
 
@@ -110,12 +112,12 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Szín"
+                label="Szï¿½n"
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
                 required
-                placeholder="Pl. barna és fehér"
+                placeholder="Pl. barna ï¿½s fehï¿½r"
               />
             </Grid>
 
@@ -130,19 +132,19 @@ const ReportFoundPetPage = () => {
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">Hím</option>
-                <option value="FEMALE">NQstény</option>
+                <option value="MALE">Hï¿½m</option>
+                <option value="FEMALE">NQstï¿½ny</option>
               </TextField>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Becsült kor"
+                label="Becsï¿½lt kor"
                 name="approximateAge"
                 value={formData.approximateAge}
                 onChange={handleChange}
-                placeholder="Pl. fiatal, felnQtt, idQs / 2-3 év körüli"
+                placeholder="Pl. fiatal, felnQtt, idQs / 2-3 ï¿½v kï¿½rï¿½li"
               />
             </Grid>
 
@@ -151,24 +153,36 @@ const ReportFoundPetPage = () => {
                 fullWidth
                 multiline
                 rows={4}
-                label="Leírás"
+                label="LeÃ­rÃ¡s"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
                 required
-                placeholder="Különleges jegyek, viselkedés, állapot, stb."
+                placeholder="KÃ¼lÃ¶nleges jegyek, viselkedÃ©s, Ã¡llapot, stb."
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle2" gutterBottom>
+                FÃ©nykÃ©pek a talÃ¡lt Ã¡llatrÃ³l
+              </Typography>
+              <ImageUpload
+                value={formData.images}
+                onChange={(images) => setFormData({ ...formData, images })}
+                multiple
+                maxImages={5}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Hol találtad?"
+                label="Hol talï¿½ltad?"
                 name="foundLocation"
                 value={formData.foundLocation}
                 onChange={handleChange}
                 required
-                placeholder="Pontos cím vagy környék"
+                placeholder="Pontos cï¿½m vagy kï¿½rnyï¿½k"
               />
             </Grid>
 
@@ -176,7 +190,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Mikor találtad?"
+                label="Mikor talï¿½ltad?"
                 name="foundDate"
                 value={formData.foundDate}
                 onChange={handleChange}
@@ -188,18 +202,18 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Ideiglenes tartózkodási hely"
+                label="Ideiglenes tartï¿½zkodï¿½si hely"
                 name="temporaryLocation"
                 value={formData.temporaryLocation}
                 onChange={handleChange}
-                placeholder="Hol van jelenleg az állat? (otthon, menhely, állatorvos, stb.)"
+                placeholder="Hol van jelenleg az ï¿½llat? (otthon, menhely, ï¿½llatorvos, stb.)"
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattartói telefon"
+                label="Kapcsolattartï¿½i telefon"
                 name="contactPhone"
                 value={formData.contactPhone}
                 onChange={handleChange}
@@ -212,7 +226,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattartói email"
+                label="Kapcsolattartï¿½i email"
                 name="contactEmail"
                 value={formData.contactEmail}
                 onChange={handleChange}
@@ -228,7 +242,7 @@ const ReportFoundPetPage = () => {
                   onClick={() => navigate('/found-pets')}
                   disabled={loading}
                 >
-                  Mégse
+                  Mï¿½gse
                 </Button>
                 <Button
                   type="submit"
@@ -236,7 +250,7 @@ const ReportFoundPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
+                  {loading ? 'Mentï¿½s...' : 'Bejelentï¿½s elkï¿½ldï¿½se'}
                 </Button>
               </Box>
             </Grid>
