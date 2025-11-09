@@ -176,5 +176,72 @@
         "a3": "Rendkívül fontos, főleg kölykököknél! Ismertesd meg más állatokkal, emberekkel, környezetekkel. Óvatos, fokozatos bemutatás. Pozitív élmények társítása új helyzetekhez."
       }
     }
+  },
+  "map": {
+    "title": "Térkép",
+    "subtitle": "Elveszett és talált állatok térképen",
+    "lost": "Elveszett",
+    "found": "Talált",
+    "reunited": "Megtalált",
+    "shelter": "Menhely",
+    "viewDetails": "Részletek",
+    "lastSeen": "Utoljára látva",
+    "foundOn": "Megtalálva",
+    "reunitedOn": "Összehozva"
+  },
+  "shelters": {
+    "title": "Menhelyek",
+    "subtitle": "Találj menhelyeket a környékeden",
+    "noShelters": "Nem találtunk menhelyeket",
+    "animals": "állat",
+    "viewShelter": "Menhely megtekintése",
+    "contact": "Kapcsolat"
+  },
+  "dashboard": {
+    "title": "Irányítópult",
+    "welcome": "Üdvözöljük",
+    "stats": "Statisztikák",
+    "totalAnimals": "Összes állat",
+    "available": "Elérhető",
+    "adopted": "Örökbefogadva",
+    "addAnimal": "Állat hozzáadása",
+    "editAnimal": "Állat szerkesztése",
+    "deleteAnimal": "Állat törlése",
+    "confirmDelete": "Biztosan törölni szeretnéd?"
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Személyes adatok",
+    "firstName": "Keresztnév",
+    "lastName": "Vezetéknév",
+    "email": "Email",
+    "phone": "Telefon",
+    "avatar": "Profilkép",
+    "uploadAvatar": "Profilkép feltöltése",
+    "changePassword": "Jelszó megváltoztatása",
+    "currentPassword": "Jelenlegi jelszó",
+    "newPassword": "Új jelszó",
+    "confirmPassword": "Jelszó megerősítése",
+    "updateProfile": "Profil frissítése",
+    "updated": "Profil sikeresen frissítve"
+  },
+  "auth": {
+    "login": "Bejelentkezés",
+    "register": "Regisztráció",
+    "email": "Email cím",
+    "password": "Jelszó",
+    "firstName": "Keresztnév",
+    "lastName": "Vezetéknév",
+    "phone": "Telefonszám",
+    "confirmPassword": "Jelszó megerősítése",
+    "forgotPassword": "Elfelejtett jelszó?",
+    "noAccount": "Nincs még fiókod?",
+    "hasAccount": "Már van fiókod?",
+    "loginHere": "Jelentkezz be itt",
+    "registerHere": "Regisztrálj itt",
+    "loggingIn": "Bejelentkezés...",
+    "registering": "Regisztráció...",
+    "loginSuccess": "Sikeres bejelentkezés",
+    "registerSuccess": "Sikeres regisztráció"
   }
 }
