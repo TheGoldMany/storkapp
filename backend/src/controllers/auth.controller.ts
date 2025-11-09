@@ -216,7 +216,7 @@ export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response
     });
   }
 
-  res.json({
+  return res.json({
     status: 'success',
     data: { user },
   });
