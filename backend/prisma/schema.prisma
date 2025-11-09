@@ -25,8 +25,9 @@ enum AnimalType {
 }
 
 enum AnimalStatus {
-  AVAILABLE      // Örökbefogadható
-  ADOPTED        // Örökbefogadva
+  AVAILABLE      // Elérhető / Örökbefogadható
+  ADOPTED        // Örökbefogadva (3 nap múlva automatikus törlés)
+  STRAY          // Kóbor
   RESERVED       // Lefoglalva
   MEDICAL_CARE   // Kezelés alatt
   NOT_AVAILABLE  // Nem elérhető
@@ -34,8 +35,8 @@ enum AnimalStatus {
 
 enum PetStatus {
   LOST      // Elveszett
-  FOUND     // Talált (kóbor)
-  REUNITED  // Visszatalált
+  FOUND     // Gazdáját keresi / Talált
+  REUNITED  // Megtalált / Megtalálta gazdáját (3 nap múlva automatikus törlés)
   CLOSED    // Lezárt
 }
 
@@ -143,6 +144,7 @@ model Animal {
   // Metadata
   intakeDate      DateTime      @default(now())
   adoptionDate    DateTime?
+  deletionScheduledAt DateTime?  // Auto-delete 3 days after ADOPTED status
 
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -182,6 +184,7 @@ model LostPet {
 
   status           PetStatus     @default(LOST)
   reward           Float?        // Jutalom összege
+  deletionScheduledAt DateTime?  // Auto-delete 3 days after REUNITED status
 
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
@@ -221,6 +224,7 @@ model FoundPet {
   // Status
   status          PetStatus     @default(FOUND)
   currentLocation String?       // Hol van most (pl. ideiglenesen nálam)
+  deletionScheduledAt DateTime?  // Auto-delete 3 days after REUNITED status
 
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt

@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
+import { geocodingService } from '../services/geocoding.service';
 
 const prisma = new PrismaClient();
 
@@ -33,6 +34,15 @@ export const createShelter = asyncHandler(async (req: AuthRequest, res: Response
     throw new AppError('User already has a shelter', 400);
   }
 
+  // Geocode address if coordinates not provided
+  let coords = { latitude, longitude };
+  if (!latitude || !longitude) {
+    const geocoded = await geocodingService.geocodeAddress(address, city, country || 'Hungary');
+    if (geocoded) {
+      coords = geocoded;
+    }
+  }
+
   const shelter = await prisma.shelter.create({
     data: {
       name,
@@ -43,8 +53,8 @@ export const createShelter = asyncHandler(async (req: AuthRequest, res: Response
       city,
       country: country || 'Hungary',
       postalCode,
-      latitude,
-      longitude,
+      latitude: coords.latitude,
+      longitude: coords.longitude,
       website,
       logo,
       images: images || [],

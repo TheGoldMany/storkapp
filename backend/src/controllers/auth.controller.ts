@@ -7,6 +7,7 @@ import { validationResult } from 'express-validator';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import { emailService } from '../services/email.service';
+import { geocodingService } from '../services/geocoding.service';
 
 const prisma = new PrismaClient();
 
@@ -31,6 +32,16 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
   const verificationToken = crypto.randomBytes(32).toString('hex');
   const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
+  // Geocode shelter address if registering as shelter admin
+  let shelterCoords = null;
+  if (role === 'SHELTER_ADMIN' && shelter) {
+    shelterCoords = await geocodingService.geocodeAddress(
+      shelter.address,
+      shelter.city,
+      shelter.country || 'Hungary'
+    );
+  }
+
   // Create user (and shelter if role is SHELTER_ADMIN)
   const user = await prisma.user.create({
     data: {
@@ -54,6 +65,8 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
             city: shelter.city,
             country: shelter.country || 'Hungary',
             postalCode: shelter.postalCode || null,
+            latitude: shelterCoords?.latitude || null,
+            longitude: shelterCoords?.longitude || null,
           },
         },
       }),
@@ -181,6 +194,22 @@ export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response
 
   // Update shelter data if user is shelter admin and shelter data provided
   if (user.role === 'SHELTER_ADMIN' && shelter && user.shelter) {
+    // Geocode if address or city changed
+    let coords: any = {};
+    if (shelter.address || shelter.city) {
+      const address = shelter.address || user.shelter.address;
+      const city = shelter.city || user.shelter.city;
+      const country = user.shelter.country || 'Hungary';
+
+      const geocoded = await geocodingService.geocodeAddress(address, city, country);
+      if (geocoded) {
+        coords = {
+          latitude: geocoded.latitude,
+          longitude: geocoded.longitude,
+        };
+      }
+    }
+
     await prisma.shelter.update({
       where: { id: user.shelter.id },
       data: {
@@ -192,6 +221,7 @@ export const updateProfile = asyncHandler(async (req: AuthRequest, res: Response
         ...(shelter.email && { email: shelter.email }),
         ...(shelter.logo !== undefined && { logo: shelter.logo }),
         ...(shelter.website !== undefined && { website: shelter.website }),
+        ...coords,
       },
     });
 

@@ -2,12 +2,13 @@ import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
+import { statusService } from '../services/status.service';
 
 const prisma = new PrismaClient();
 
 // Type aliases that work with or without Prisma client generated
 type AnimalType = 'DOG' | 'CAT' | 'BIRD' | 'RABBIT' | 'OTHER';
-type AnimalStatus = 'AVAILABLE' | 'ADOPTED' | 'RESERVED' | 'MEDICAL_CARE' | 'NOT_AVAILABLE';
+type AnimalStatus = 'AVAILABLE' | 'ADOPTED' | 'STRAY' | 'RESERVED' | 'MEDICAL_CARE' | 'NOT_AVAILABLE';
 
 
 export const createAnimal = asyncHandler(async (req: AuthRequest, res: Response) => {
@@ -170,9 +171,16 @@ export const updateAnimal = asyncHandler(async (req: AuthRequest, res: Response)
     throw new AppError('Unauthorized', 403);
   }
 
+  // Handle status change for auto-deletion
+  let updateData: any = { ...req.body };
+  if (req.body.status && req.body.status !== animal.status) {
+    const statusChange = statusService.handleAnimalStatusChange(animal.status, req.body.status);
+    updateData = { ...updateData, ...statusChange };
+  }
+
   const updatedAnimal = await prisma.animal.update({
     where: { id },
-    data: req.body,
+    data: updateData,
   });
 
   res.json({

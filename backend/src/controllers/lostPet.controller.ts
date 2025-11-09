@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
+import { statusService } from '../services/status.service';
 import axios from 'axios';
 
 const prisma = new PrismaClient();
@@ -181,9 +182,16 @@ export const updateLostPet = asyncHandler(async (req: AuthRequest, res: Response
     throw new AppError('Unauthorized', 403);
   }
 
+  // Handle status change for auto-deletion
+  let updateData: any = { ...req.body };
+  if (req.body.status && req.body.status !== lostPet.status) {
+    const statusChange = statusService.handlePetStatusChange(lostPet.status, req.body.status);
+    updateData = { ...updateData, ...statusChange };
+  }
+
   const updatedLostPet = await prisma.lostPet.update({
     where: { id },
-    data: req.body,
+    data: updateData,
   });
 
   res.json({

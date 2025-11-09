@@ -14,7 +14,7 @@ import { matchRouter } from './routes/match.routes';
 import { uploadRouter } from './routes/upload.routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './utils/logger';
-import { startAutoDeleteReunitedPets } from './services/scheduler.service';
+import { schedulerService } from './services/scheduler.service';
 
 dotenv.config();
 
@@ -85,8 +85,8 @@ app.listen(PORT, () => {
   logger.info(`🚀 Server running on port ${PORT}`);
   logger.info(`📝 Environment: ${process.env.NODE_ENV}`);
 
-  // Start auto-delete scheduler for reunited pets (runs daily at 2 AM)
-  startAutoDeleteReunitedPets();
+  // Start scheduler for auto-deletion (runs daily at 2 AM)
+  schedulerService.start();
 });
 
 export default app;
