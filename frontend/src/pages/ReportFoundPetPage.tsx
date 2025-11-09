@@ -13,9 +13,11 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { foundPetAPI } from '../services/api'
 import ImageUpload from '../components/ImageUpload'
+import { useTranslation } from 'react-i18next'
 
 const ReportFoundPetPage = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
@@ -53,7 +55,7 @@ const ReportFoundPetPage = () => {
       await foundPetAPI.createFoundPet(submitData)
       navigate('/found-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
+      setError(err.response?.data?.message || t('foundPets.error'))
     } finally {
       setLoading(false)
     }
@@ -66,15 +68,15 @@ const ReportFoundPetPage = () => {
         onClick={() => navigate('/found-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza a talált állatokhoz
+        {t('foundPets.back')}
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Talált állat bejelentése
+          {t('foundPets.formTitle')}
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          Ha találtál egy állatot, töltsd ki az alábbi űrlapot, hogy segíthessünk visszajuttatni gazdájához.
+          {t('foundPets.formSubtitle')}
         </Typography>
 
         {error && (
@@ -89,25 +91,25 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Típus"
+                label={t('foundPets.type')}
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="DOG">Kutya</option>
-                <option value="CAT">Macska</option>
-                <option value="BIRD">Madár</option>
-                <option value="RABBIT">Nyúl</option>
-                <option value="OTHER">Egyéb</option>
+                <option value="DOG">{t('animals.types.DOG')}</option>
+                <option value="CAT">{t('animals.types.CAT')}</option>
+                <option value="BIRD">{t('animals.types.BIRD')}</option>
+                <option value="RABBIT">{t('animals.types.RABBIT')}</option>
+                <option value="OTHER">{t('animals.types.OTHER')}</option>
               </TextField>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Fajta (ha ismert)"
+                label={t('foundPets.breed')}
                 name="breed"
                 value={formData.breed}
                 onChange={handleChange}
@@ -118,7 +120,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Szín"
+                label={t('foundPets.color')}
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
@@ -131,15 +133,15 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Nem"
+                label={t('foundPets.gender')}
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">Hím</option>
-                <option value="FEMALE">Nőstény</option>
+                <option value="MALE">{t('animals.genders.MALE')}</option>
+                <option value="FEMALE">{t('animals.genders.FEMALE')}</option>
               </TextField>
             </Grid>
 
@@ -147,7 +149,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Becsült kor (év)"
+                label={t('foundPets.age')}
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
@@ -160,7 +162,7 @@ const ReportFoundPetPage = () => {
                 fullWidth
                 multiline
                 rows={4}
-                label="Leírás"
+                label={t('foundPets.description')}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
@@ -171,7 +173,7 @@ const ReportFoundPetPage = () => {
 
             <Grid item xs={12}>
               <Typography variant="subtitle2" gutterBottom>
-                Fényképek a talált állatról
+                {t('foundPets.images')}
               </Typography>
               <ImageUpload
                 value={formData.images}
@@ -184,7 +186,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Város"
+                label={t('foundPets.city')}
                 name="foundCity"
                 value={formData.foundCity}
                 onChange={handleChange}
@@ -196,7 +198,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Hol találtad?"
+                label={t('foundPets.foundLocation')}
                 name="foundLocation"
                 value={formData.foundLocation}
                 onChange={handleChange}
@@ -209,7 +211,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Mikor találtad?"
+                label={t('foundPets.foundDate')}
                 name="foundDate"
                 value={formData.foundDate}
                 onChange={handleChange}
@@ -221,7 +223,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Ideiglenes tartózkodási hely"
+                label={t('foundPets.currentLocation')}
                 name="currentLocation"
                 value={formData.currentLocation}
                 onChange={handleChange}
@@ -232,7 +234,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Megtaláló neve"
+                label={t('foundPets.finderName')}
                 name="finderName"
                 value={formData.finderName}
                 onChange={handleChange}
@@ -244,7 +246,7 @@ const ReportFoundPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattartói telefon"
+                label={t('foundPets.finderPhone')}
                 name="finderPhone"
                 value={formData.finderPhone}
                 onChange={handleChange}
@@ -257,7 +259,7 @@ const ReportFoundPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattartói email"
+                label={t('foundPets.finderEmail')}
                 name="finderEmail"
                 value={formData.finderEmail}
                 onChange={handleChange}
@@ -272,7 +274,7 @@ const ReportFoundPetPage = () => {
                   onClick={() => navigate('/found-pets')}
                   disabled={loading}
                 >
-                  Mégse
+                  {t('common.cancel')}
                 </Button>
                 <Button
                   type="submit"
@@ -280,7 +282,7 @@ const ReportFoundPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
+                  {loading ? `${t('common.save')}...` : t('foundPets.submit')}
                 </Button>
               </Box>
             </Grid>

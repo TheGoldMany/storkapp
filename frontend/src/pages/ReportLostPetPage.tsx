@@ -13,9 +13,11 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { lostPetAPI } from '../services/api'
 import ImageUpload from '../components/ImageUpload'
+import { useTranslation } from 'react-i18next'
 
 const ReportLostPetPage = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
@@ -55,7 +57,7 @@ const ReportLostPetPage = () => {
       await lostPetAPI.createLostPet(submitData)
       navigate('/lost-pets')
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Hiba történt a bejelentés során')
+      setError(err.response?.data?.message || t('lostPets.error'))
     } finally {
       setLoading(false)
     }
@@ -68,15 +70,15 @@ const ReportLostPetPage = () => {
         onClick={() => navigate('/lost-pets')}
         sx={{ mb: 3 }}
       >
-        Vissza az elveszett állatokhoz
+        {t('lostPets.back')}
       </Button>
 
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Elveszett állat bejelentése
+          {t('lostPets.formTitle')}
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
-          Töltsd ki az alábbi űrlapot, hogy segíthessünk megtalálni elveszett kedvencedet.
+          {t('lostPets.formSubtitle')}
         </Typography>
 
         {error && (
@@ -90,7 +92,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label="Állat neve"
+                label={t('lostPets.name')}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -102,25 +104,25 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Típus"
+                label={t('lostPets.type')}
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="DOG">Kutya</option>
-                <option value="CAT">Macska</option>
-                <option value="BIRD">Madár</option>
-                <option value="RABBIT">Nyúl</option>
-                <option value="OTHER">Egyéb</option>
+                <option value="DOG">{t('animals.types.DOG')}</option>
+                <option value="CAT">{t('animals.types.CAT')}</option>
+                <option value="BIRD">{t('animals.types.BIRD')}</option>
+                <option value="RABBIT">{t('animals.types.RABBIT')}</option>
+                <option value="OTHER">{t('animals.types.OTHER')}</option>
               </TextField>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Fajta"
+                label={t('lostPets.breed')}
                 name="breed"
                 value={formData.breed}
                 onChange={handleChange}
@@ -131,7 +133,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Szín"
+                label={t('lostPets.color')}
                 name="color"
                 value={formData.color}
                 onChange={handleChange}
@@ -143,15 +145,15 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 select
-                label="Nem"
+                label={t('lostPets.gender')}
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
                 SelectProps={{ native: true }}
                 required
               >
-                <option value="MALE">Hím</option>
-                <option value="FEMALE">Nőstény</option>
+                <option value="MALE">{t('animals.genders.MALE')}</option>
+                <option value="FEMALE">{t('animals.genders.FEMALE')}</option>
               </TextField>
             </Grid>
 
@@ -159,7 +161,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Kor (év)"
+                label={t('lostPets.age')}
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
@@ -172,7 +174,7 @@ const ReportLostPetPage = () => {
                 fullWidth
                 multiline
                 rows={4}
-                label="Leírás"
+                label={t('lostPets.description')}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
@@ -182,7 +184,7 @@ const ReportLostPetPage = () => {
 
             <Grid item xs={12}>
               <Typography variant="subtitle2" gutterBottom>
-                Fényképek az állatról
+                {t('lostPets.images')}
               </Typography>
               <ImageUpload
                 value={formData.images}
@@ -195,7 +197,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Város"
+                label={t('lostPets.city')}
                 name="lastSeenCity"
                 value={formData.lastSeenCity}
                 onChange={handleChange}
@@ -207,7 +209,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Utoljára látott helyszín"
+                label={t('lostPets.lastSeenLocation')}
                 name="lastSeenLocation"
                 value={formData.lastSeenLocation}
                 onChange={handleChange}
@@ -220,7 +222,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="date"
-                label="Utoljára látva dátuma"
+                label={t('lostPets.lastSeenDate')}
                 name="lastSeenDate"
                 value={formData.lastSeenDate}
                 onChange={handleChange}
@@ -232,7 +234,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattartó neve"
+                label={t('lostPets.contactName')}
                 name="contactName"
                 value={formData.contactName}
                 onChange={handleChange}
@@ -244,7 +246,7 @@ const ReportLostPetPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Kapcsolattartói telefon"
+                label={t('lostPets.contactPhone')}
                 name="contactPhone"
                 value={formData.contactPhone}
                 onChange={handleChange}
@@ -257,7 +259,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="email"
-                label="Kapcsolattartói email"
+                label={t('lostPets.contactEmail')}
                 name="contactEmail"
                 value={formData.contactEmail}
                 onChange={handleChange}
@@ -270,7 +272,7 @@ const ReportLostPetPage = () => {
               <TextField
                 fullWidth
                 type="number"
-                label="Jutalom (opcionális, Ft-ban)"
+                label={t('lostPets.reward')}
                 name="reward"
                 value={formData.reward}
                 onChange={handleChange}
@@ -285,7 +287,7 @@ const ReportLostPetPage = () => {
                   onClick={() => navigate('/lost-pets')}
                   disabled={loading}
                 >
-                  Mégse
+                  {t('common.cancel')}
                 </Button>
                 <Button
                   type="submit"
@@ -293,7 +295,7 @@ const ReportLostPetPage = () => {
                   disabled={loading}
                   size="large"
                 >
-                  {loading ? 'Mentés...' : 'Bejelentés elküldése'}
+                  {loading ? `${t('common.save')}...` : t('lostPets.submit')}
                 </Button>
               </Box>
             </Grid>
