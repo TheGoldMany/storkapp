@@ -161,9 +161,16 @@ const LostPetsPage = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backgroundImage: pet.images?.length > 0
+                        ? `url(http://localhost:3000${pet.images[0]})`
+                        : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
                     }}
                   >
-                    <PetsIcon sx={{ fontSize: 64, color: 'error.main' }} />
+                    {!pet.images?.length && (
+                      <PetsIcon sx={{ fontSize: 64, color: 'error.main' }} />
+                    )}
                   </CardMedia>
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography variant="h6" gutterBottom>

@@ -123,16 +123,22 @@ const AnimalsPage = () => {
                 <Grid item xs={12} sm={6} md={4} key={animal.id}>
                   <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <CardMedia
-                      component="div"
                       sx={{
                         height: 200,
                         bgcolor: 'grey.200',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        backgroundImage: animal.images?.length > 0
+                          ? `url(http://localhost:3000${animal.images[0]})`
+                          : 'none',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
                       }}
                     >
-                      <PetsIcon sx={{ fontSize: 80, color: 'grey.400' }} />
+                      {!animal.images?.length && (
+                        <PetsIcon sx={{ fontSize: 80, color: 'grey.400' }} />
+                      )}
                     </CardMedia>
                     <CardContent sx={{ flexGrow: 1 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>

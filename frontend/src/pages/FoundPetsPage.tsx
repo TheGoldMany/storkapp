@@ -161,9 +161,16 @@ const FoundPetsPage = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
+                      backgroundImage: pet.images?.length > 0
+                        ? `url(http://localhost:3000${pet.images[0]})`
+                        : 'none',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
                     }}
                   >
-                    <PetsIcon sx={{ fontSize: 64, color: 'success.main' }} />
+                    {!pet.images?.length && (
+                      <PetsIcon sx={{ fontSize: 64, color: 'success.main' }} />
+                    )}
                   </CardMedia>
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Box sx={{ mb: 2 }}>

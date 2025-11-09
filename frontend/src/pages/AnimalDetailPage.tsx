@@ -116,9 +116,16 @@ const AnimalDetailPage = () => {
               justifyContent: 'center',
               bgcolor: 'primary.light',
               position: 'relative',
+              backgroundImage: animal.images?.length > 0
+                ? `url(http://localhost:3000${animal.images[0]})`
+                : 'none',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           >
-            <PetsIcon sx={{ fontSize: 120, color: 'primary.main' }} />
+            {!animal.images?.length && (
+              <PetsIcon sx={{ fontSize: 120, color: 'primary.main' }} />
+            )}
             <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
               <Chip
                 label={getStatusLabel(animal.status)}
@@ -127,6 +134,24 @@ const AnimalDetailPage = () => {
               />
             </Box>
           </Paper>
+          {animal.images?.length > 1 && (
+            <Box sx={{ display: 'flex', gap: 1, mt: 2, overflowX: 'auto' }}>
+              {animal.images.map((img: string, idx: number) => (
+                <Paper
+                  key={idx}
+                  elevation={2}
+                  sx={{
+                    minWidth: 80,
+                    height: 80,
+                    backgroundImage: `url(http://localhost:3000${img})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    cursor: 'pointer',
+                  }}
+                />
+              ))}
+            </Box>
+          )}
         </Grid>
 
         {/* Animal Details Section */}
