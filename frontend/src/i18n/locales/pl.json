@@ -35,7 +35,11 @@
     "privacy": "Prywatność",
     "terms": "Regulamin",
     "followUs": "Śledź nas",
-    "copyright": "© 2025 Stork App. Wszelkie prawa zastrzeżone."
+    "copyright": "© 2025 Stork App. Wszelkie prawa zastrzeżone.",
+    "description": "Pomagamy znaleźć zaginione zwierzęta i zapewnić nowe domy dla zwierząt ze schronisk.",
+    "links": "Linki",
+    "email": "Email",
+    "phone": "Telefon"
   },
   "home": {
     "hero": {
@@ -56,6 +60,10 @@
         "title": "Ucz się",
         "description": "Zdobądź przydatne informacje o opiece nad zwierzętami"
       }
+    },
+    "callToAction": {
+      "title": "Dołącz do nas!",
+      "description": "Zarejestruj się jako schronisko lub osoba prywatna i pomóż zwierzętom"
     }
   },
   "animals": {
@@ -71,6 +79,10 @@
     "neutered": "Wykastrowane",
     "microchipped": "Z chipem",
     "viewDetails": "Zobacz szczegóły",
+    "mixedBreed": "Mieszaniec",
+    "unknownAge": "Nieznany wiek",
+    "monthsOld": "miesięcy",
+    "shelter": "Schronisko",
     "types": {
       "DOG": "Pies",
       "CAT": "Kot",
@@ -112,7 +124,9 @@
     "contactEmail": "Email kontaktowy",
     "reward": "Nagroda (opcjonalnie)",
     "submit": "Wyślij zgłoszenie",
-    "error": "Wystąpił błąd podczas wysyłania zgłoszenia"
+    "error": "Wystąpił błąd podczas wysyłania zgłoszenia",
+    "unnamed": "Bez nazwy",
+    "rewardLabel": "Nagroda"
   },
   "foundPets": {
     "title": "Znalezione zwierzęta",
@@ -137,7 +151,8 @@
     "finderPhone": "Telefon kontaktowy",
     "finderEmail": "Email kontaktowy",
     "submit": "Wyślij zgłoszenie",
-    "error": "Wystąpił błąd podczas wysyłania zgłoszenia"
+    "error": "Wystąpił błąd podczas wysyłania zgłoszenia",
+    "temporaryLocationLabel": "Tymczasowa lokalizacja"
   },
   "tips": {
     "title": "Porady i wskazówki",
@@ -176,5 +191,72 @@
         "a3": "Niezwykle ważna, szczególnie dla szczeniąt/kociąt! Przedstaw je innym zwierzętom, ludziom, środowiskom. Ostrożne, stopniowe wprowadzenie. Kojarz pozytywne doświadczenia z nowymi sytuacjami."
       }
     }
+  },
+  "map": {
+    "title": "Mapa",
+    "subtitle": "Zaginione i znalezione zwierzęta na mapie",
+    "lost": "Zaginione",
+    "found": "Znalezione",
+    "reunited": "Połączone",
+    "shelter": "Schronisko",
+    "viewDetails": "Zobacz szczegóły",
+    "lastSeen": "Ostatnio widziane",
+    "foundOn": "Znalezione",
+    "reunitedOn": "Połączone"
+  },
+  "shelters": {
+    "title": "Schroniska",
+    "subtitle": "Znajdź schroniska w pobliżu",
+    "noShelters": "Nie znaleziono schronisk",
+    "animals": "zwierzęta",
+    "viewShelter": "Zobacz schronisko",
+    "contact": "Kontakt"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "welcome": "Witamy",
+    "stats": "Statystyki",
+    "totalAnimals": "Wszystkie zwierzęta",
+    "available": "Dostępne",
+    "adopted": "Adoptowane",
+    "addAnimal": "Dodaj zwierzę",
+    "editAnimal": "Edytuj zwierzę",
+    "deleteAnimal": "Usuń zwierzę",
+    "confirmDelete": "Czy na pewno chcesz usunąć?"
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Informacje osobiste",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "Email",
+    "phone": "Telefon",
+    "avatar": "Awatar",
+    "uploadAvatar": "Prześlij awatar",
+    "changePassword": "Zmień hasło",
+    "currentPassword": "Obecne hasło",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "updateProfile": "Zaktualizuj profil",
+    "updated": "Profil zaktualizowany pomyślnie"
+  },
+  "auth": {
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "email": "Adres email",
+    "password": "Hasło",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "phone": "Numer telefonu",
+    "confirmPassword": "Potwierdź hasło",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "noAccount": "Nie masz konta?",
+    "hasAccount": "Masz już konto?",
+    "loginHere": "Zaloguj się tutaj",
+    "registerHere": "Zarejestruj się tutaj",
+    "loggingIn": "Logowanie...",
+    "registering": "Rejestracja...",
+    "loginSuccess": "Logowanie udane",
+    "registerSuccess": "Rejestracja udana"
   }
 }

@@ -18,9 +18,11 @@ import AddIcon from '@mui/icons-material/Add'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import PetsIcon from '@mui/icons-material/Pets'
+import { useTranslation } from 'react-i18next'
 import { foundPetAPI } from '../services/api'
 
 const FoundPetsPage = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [foundPets, setFoundPets] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -67,10 +69,10 @@ const FoundPetsPage = () => {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Box>
           <Typography variant="h3" gutterBottom>
-            Talált állatok
+            {t('foundPets.title')}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Segíts visszajuttatni a talált állatokat gazdájukhoz
+            {t('foundPets.subtitle')}
           </Typography>
         </Box>
         <Button
@@ -79,7 +81,7 @@ const FoundPetsPage = () => {
           onClick={() => navigate('/found-pets/report')}
           size="large"
         >
-          Talált állat bejelentése
+          {t('foundPets.report')}
         </Button>
       </Box>
 
@@ -90,26 +92,25 @@ const FoundPetsPage = () => {
             <TextField
               fullWidth
               select
-              label="Állat típusa"
+              label={t('animals.type')}
               value={filters.type}
               onChange={(e) => handleFilterChange('type', e.target.value)}
               SelectProps={{ native: true }}
             >
-              <option value="">Összes</option>
-              <option value="DOG">Kutya</option>
-              <option value="CAT">Macska</option>
-              <option value="BIRD">Madár</option>
-              <option value="RABBIT">Nyúl</option>
-              <option value="OTHER">Egyéb</option>
+              <option value="">{t('common.all')}</option>
+              <option value="DOG">{t('animals.types.DOG')}</option>
+              <option value="CAT">{t('animals.types.CAT')}</option>
+              <option value="BIRD">{t('animals.types.BIRD')}</option>
+              <option value="RABBIT">{t('animals.types.RABBIT')}</option>
+              <option value="OTHER">{t('animals.types.OTHER')}</option>
             </TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Város"
+              label={t('foundPets.city')}
               value={filters.city}
               onChange={(e) => handleFilterChange('city', e.target.value)}
-              placeholder="Város szűrés..."
             />
           </Grid>
         </Grid>
@@ -118,13 +119,13 @@ const FoundPetsPage = () => {
       {/* Found Pets Grid */}
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <Typography>Betöltés...</Typography>
+          <Typography>{t('common.loading')}</Typography>
         </Box>
       ) : foundPets.length === 0 ? (
         <Paper elevation={2} sx={{ p: 6, textAlign: 'center' }}>
           <PetsIcon sx={{ fontSize: 64, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h6" color="text.secondary" gutterBottom>
-            Nem találtunk talált állatokat a megadott szűrőkkel
+            {t('foundPets.noFoundPets')}
           </Typography>
           <Button
             variant="contained"
@@ -132,7 +133,7 @@ const FoundPetsPage = () => {
             onClick={() => navigate('/found-pets/report')}
             sx={{ mt: 2 }}
           >
-            Talált állat bejelentése
+            {t('foundPets.report')}
           </Button>
         </Paper>
       ) : (
@@ -175,7 +176,7 @@ const FoundPetsPage = () => {
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Box sx={{ mb: 2 }}>
                       <Chip
-                        label={pet.type}
+                        label={t(`animals.types.${pet.type}`)}
                         size="small"
                         color="success"
                         sx={{ mr: 1 }}
@@ -209,7 +210,7 @@ const FoundPetsPage = () => {
                     {pet.temporaryLocation && (
                       <Box sx={{ mt: 2, p: 1, bgcolor: 'info.light', borderRadius: 1 }}>
                         <Typography variant="caption" color="info.dark">
-                          Ideiglenes tartózkodási hely: {pet.temporaryLocation}
+                          {t('foundPets.temporaryLocationLabel')}: {pet.temporaryLocation}
                         </Typography>
                       </Box>
                     )}

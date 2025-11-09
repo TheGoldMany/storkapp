@@ -17,9 +17,11 @@ import {
   Pagination,
 } from '@mui/material'
 import { Pets as PetsIcon, LocationOn as LocationIcon } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 import { animalAPI } from '../services/api'
 
 const AnimalsPage = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [animals, setAnimals] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -60,25 +62,14 @@ const AnimalsPage = () => {
     setPage(1) // Reset to first page when filtering
   }
 
-  const getAnimalTypeLabel = (type: string) => {
-    const labels: Record<string, string> = {
-      DOG: 'Kutya',
-      CAT: 'Macska',
-      BIRD: 'Madár',
-      RABBIT: 'Nyúl',
-      OTHER: 'Egyéb',
-    }
-    return labels[type] || type
-  }
-
   return (
     <Container maxWidth="lg">
       <Box sx={{ mt: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Örökbefogadható állatok
+          {t('animals.title')}
         </Typography>
         <Typography variant="body1" color="text.secondary" paragraph>
-          Találd meg új legjobb barátodat a menhelyeken
+          {t('animals.subtitle')}
         </Typography>
 
         {/* Filters */}
@@ -87,27 +78,26 @@ const AnimalsPage = () => {
             <TextField
               fullWidth
               select
-              label="Típus"
+              label={t('animals.type')}
               name="type"
               value={filters.type}
               onChange={handleFilterChange}
             >
-              <MenuItem value="">Összes</MenuItem>
-              <MenuItem value="DOG">Kutya</MenuItem>
-              <MenuItem value="CAT">Macska</MenuItem>
-              <MenuItem value="BIRD">Madár</MenuItem>
-              <MenuItem value="RABBIT">Nyúl</MenuItem>
-              <MenuItem value="OTHER">Egyéb</MenuItem>
+              <MenuItem value="">{t('common.all')}</MenuItem>
+              <MenuItem value="DOG">{t('animals.types.DOG')}</MenuItem>
+              <MenuItem value="CAT">{t('animals.types.CAT')}</MenuItem>
+              <MenuItem value="BIRD">{t('animals.types.BIRD')}</MenuItem>
+              <MenuItem value="RABBIT">{t('animals.types.RABBIT')}</MenuItem>
+              <MenuItem value="OTHER">{t('animals.types.OTHER')}</MenuItem>
             </TextField>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               fullWidth
-              label="Város"
+              label={t('lostPets.city')}
               name="city"
               value={filters.city}
               onChange={handleFilterChange}
-              placeholder="Pl. Budapest"
             />
           </Grid>
         </Grid>
@@ -144,13 +134,13 @@ const AnimalsPage = () => {
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
                         <Typography variant="h6">{animal.name}</Typography>
                         <Chip
-                          label={getAnimalTypeLabel(animal.type)}
+                          label={t(`animals.types.${animal.type}`)}
                           size="small"
                           color="primary"
                         />
                       </Box>
                       <Typography variant="body2" color="text.secondary" gutterBottom>
-                        {animal.breed || 'Keverék'} • {animal.age ? `${animal.age} hónapos` : 'Ismeretlen kor'}
+                        {animal.breed || t('animals.mixedBreed')} • {animal.age ? `${animal.age} ${t('animals.monthsOld')}` : t('animals.unknownAge')}
                       </Typography>
                       <Typography variant="body2" sx={{ mt: 1, mb: 1 }}>
                         {animal.description?.substring(0, 100)}
@@ -163,9 +153,9 @@ const AnimalsPage = () => {
                         </Typography>
                       </Box>
                       <Box sx={{ mt: 1 }}>
-                        {animal.vaccinated && <Chip label="Oltva" size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
-                        {animal.neutered && <Chip label="Ivartalanítva" size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
-                        {animal.microchipped && <Chip label="Chippelve" size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
+                        {animal.vaccinated && <Chip label={t('animals.vaccinated')} size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
+                        {animal.neutered && <Chip label={t('animals.neutered')} size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
+                        {animal.microchipped && <Chip label={t('animals.microchipped')} size="small" sx={{ mr: 0.5, mb: 0.5 }} />}
                       </Box>
                     </CardContent>
                     <CardActions>
@@ -173,13 +163,13 @@ const AnimalsPage = () => {
                         size="small"
                         onClick={() => navigate(`/animals/${animal.id}`)}
                       >
-                        Részletek
+                        {t('animals.viewDetails')}
                       </Button>
                       <Button
                         size="small"
                         onClick={() => navigate(`/shelters/${animal.shelter.id}`)}
                       >
-                        Menhely
+                        {t('animals.shelter')}
                       </Button>
                     </CardActions>
                   </Card>
@@ -191,7 +181,7 @@ const AnimalsPage = () => {
               <Box sx={{ textAlign: 'center', py: 8 }}>
                 <PetsIcon sx={{ fontSize: 80, color: 'grey.300', mb: 2 }} />
                 <Typography variant="h6" color="text.secondary">
-                  Nincs található állat ezekkel a keresési feltételekkel
+                  {t('animals.noAnimals')}
                 </Typography>
               </Box>
             )}

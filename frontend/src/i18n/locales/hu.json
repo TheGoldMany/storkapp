@@ -35,7 +35,11 @@
     "privacy": "Adatvédelem",
     "terms": "Felhasználási feltételek",
     "followUs": "Kövess minket",
-    "copyright": "© 2025 Stork App. Minden jog fenntartva."
+    "copyright": "© 2025 Stork App. Minden jog fenntartva.",
+    "description": "Segítünk megtalálni elveszett háziállatokat és új otthont menhelyi állatoknak.",
+    "links": "Linkek",
+    "email": "Email",
+    "phone": "Telefon"
   },
   "home": {
     "hero": {
@@ -56,6 +60,10 @@
         "title": "Tanulj",
         "description": "Szerezz hasznos információkat állatok gondozásáról"
       }
+    },
+    "callToAction": {
+      "title": "Csatlakozz hozzánk!",
+      "description": "Regisztrálj menhelyként vagy magánszemélyként és segíts az állatoknak"
     }
   },
   "animals": {
@@ -71,6 +79,10 @@
     "neutered": "Ivartalanított",
     "microchipped": "Chippel ellátott",
     "viewDetails": "Részletek megtekintése",
+    "mixedBreed": "Keverék",
+    "unknownAge": "Ismeretlen kor",
+    "monthsOld": "hónapos",
+    "shelter": "Menhely",
     "types": {
       "DOG": "Kutya",
       "CAT": "Macska",
@@ -112,7 +124,9 @@
     "contactEmail": "Kapcsolattartói email",
     "reward": "Jutalom (opcionális, Ft-ban)",
     "submit": "Bejelentés elküldése",
-    "error": "Hiba történt a bejelentés során"
+    "error": "Hiba történt a bejelentés során",
+    "unnamed": "Névtelen",
+    "rewardLabel": "Jutalom"
   },
   "foundPets": {
     "title": "Talált állatok",
@@ -137,7 +151,8 @@
     "finderPhone": "Kapcsolattartói telefon",
     "finderEmail": "Kapcsolattartói email",
     "submit": "Bejelentés elküldése",
-    "error": "Hiba történt a bejelentés során"
+    "error": "Hiba történt a bejelentés során",
+    "temporaryLocationLabel": "Ideiglenes tartózkodási hely"
   },
   "tips": {
     "title": "Tanácsok és tippek",

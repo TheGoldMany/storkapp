@@ -1,7 +1,10 @@
 import { Box, Container, Typography, Link as MuiLink, Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
+  const { t } = useTranslation()
+
   return (
     <Box
       component="footer"
@@ -16,44 +19,44 @@ const Footer = () => {
         <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" color="text.primary" gutterBottom>
-              Stork App
+              {t('common.appName')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Segítünk megtalálni elveszett háziállatokat és új otthont menhelyi állatoknak.
+              {t('footer.description')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" color="text.primary" gutterBottom>
-              Linkek
+              {t('footer.links')}
             </Typography>
             <MuiLink component={Link} to="/shelters" display="block" color="text.secondary">
-              Menhelyek
+              {t('shelters.title')}
             </MuiLink>
             <MuiLink component={Link} to="/animals" display="block" color="text.secondary">
-              Örökbefogadható állatok
+              {t('animals.title')}
             </MuiLink>
             <MuiLink component={Link} to="/lost-pets" display="block" color="text.secondary">
-              Elveszett állatok
+              {t('lostPets.title')}
             </MuiLink>
             <MuiLink component={Link} to="/health-info" display="block" color="text.secondary">
-              Állattartási tanácsok
+              {t('tips.title')}
             </MuiLink>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" color="text.primary" gutterBottom>
-              Kapcsolat
+              {t('footer.contact')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Email: info@storkapp.hu
+              {t('footer.email')}: info@storkapp.hu
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Telefon: +36 1 234 5678
+              {t('footer.phone')}: +36 1 234 5678
             </Typography>
           </Grid>
         </Grid>
         <Box mt={3}>
           <Typography variant="body2" color="text.secondary" align="center">
-            © {new Date().getFullYear()} Stork App. Minden jog fenntartva.
+            {t('footer.copyright')}
           </Typography>
         </Box>
       </Container>

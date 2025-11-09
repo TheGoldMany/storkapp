@@ -35,7 +35,11 @@
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
     "followUs": "Folgen Sie uns",
-    "copyright": "© 2025 Stork App. Alle Rechte vorbehalten."
+    "copyright": "© 2025 Stork App. Alle Rechte vorbehalten.",
+    "description": "Wir helfen, verlorene Haustiere zu finden und Tierheimtieren ein neues Zuhause zu geben.",
+    "links": "Links",
+    "email": "E-Mail",
+    "phone": "Telefon"
   },
   "home": {
     "hero": {
@@ -56,6 +60,10 @@
         "title": "Lernen",
         "description": "Erhalten Sie nützliche Informationen über die Tierpflege"
       }
+    },
+    "callToAction": {
+      "title": "Mach mit!",
+      "description": "Registrieren Sie sich als Tierheim oder Privatperson und helfen Sie Tieren"
     }
   },
   "animals": {
@@ -71,6 +79,10 @@
     "neutered": "Kastriert",
     "microchipped": "Gechippt",
     "viewDetails": "Details ansehen",
+    "mixedBreed": "Mischling",
+    "unknownAge": "Unbekanntes Alter",
+    "monthsOld": "Monate alt",
+    "shelter": "Tierheim",
     "types": {
       "DOG": "Hund",
       "CAT": "Katze",
@@ -112,7 +124,9 @@
     "contactEmail": "Kontakt-E-Mail",
     "reward": "Belohnung (optional)",
     "submit": "Meldung absenden",
-    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten"
+    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten",
+    "unnamed": "Namenlos",
+    "rewardLabel": "Belohnung"
   },
   "foundPets": {
     "title": "Gefundene Tiere",
@@ -137,7 +151,8 @@
     "finderPhone": "Kontakttelefon",
     "finderEmail": "Kontakt-E-Mail",
     "submit": "Meldung absenden",
-    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten"
+    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten",
+    "temporaryLocationLabel": "Vorübergehender Standort"
   },
   "tips": {
     "title": "Tipps und Ratschläge",
@@ -176,5 +191,72 @@
         "a3": "Äußerst wichtig, besonders für Welpen/Kätzchen! Führen Sie sie anderen Tieren, Menschen und Umgebungen vor. Vorsichtige, schrittweise Einführung. Verknüpfen Sie positive Erfahrungen mit neuen Situationen."
       }
     }
+  },
+  "map": {
+    "title": "Karte",
+    "subtitle": "Vermisste und gefundene Tiere auf der Karte",
+    "lost": "Vermisst",
+    "found": "Gefunden",
+    "reunited": "Wiedervereint",
+    "shelter": "Tierheim",
+    "viewDetails": "Details ansehen",
+    "lastSeen": "Zuletzt gesehen",
+    "foundOn": "Gefunden am",
+    "reunitedOn": "Wiedervereint am"
+  },
+  "shelters": {
+    "title": "Tierheime",
+    "subtitle": "Finden Sie Tierheime in Ihrer Nähe",
+    "noShelters": "Keine Tierheime gefunden",
+    "animals": "Tiere",
+    "viewShelter": "Tierheim ansehen",
+    "contact": "Kontakt"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Willkommen",
+    "stats": "Statistiken",
+    "totalAnimals": "Alle Tiere",
+    "available": "Verfügbar",
+    "adopted": "Adoptiert",
+    "addAnimal": "Tier hinzufügen",
+    "editAnimal": "Tier bearbeiten",
+    "deleteAnimal": "Tier löschen",
+    "confirmDelete": "Möchten Sie wirklich löschen?"
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Persönliche Informationen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "avatar": "Avatar",
+    "uploadAvatar": "Avatar hochladen",
+    "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "updateProfile": "Profil aktualisieren",
+    "updated": "Profil erfolgreich aktualisiert"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefonnummer",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?",
+    "loginHere": "Hier anmelden",
+    "registerHere": "Hier registrieren",
+    "loggingIn": "Anmeldung...",
+    "registering": "Registrierung...",
+    "loginSuccess": "Anmeldung erfolgreich",
+    "registerSuccess": "Registrierung erfolgreich"
   }
 }

@@ -137,10 +137,10 @@ const HomePage = () => {
       {/* Call to Action */}
       <Box sx={{ textAlign: 'center', py: 6, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="h4" gutterBottom>
-          Csatlakozz hozzánk!
+          {t('home.callToAction.title')}
         </Typography>
         <Typography variant="body1" color="text.secondary" paragraph>
-          Regisztrálj menhelyként vagy magánszemélyként és segíts az állatoknak
+          {t('home.callToAction.description')}
         </Typography>
         <Button variant="contained" color="secondary" size="large" component={Link} to="/register">
           {t('auth.register')}

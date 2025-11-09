@@ -35,7 +35,11 @@
     "privacy": "Privacy",
     "terms": "Terms of Service",
     "followUs": "Follow Us",
-    "copyright": "© 2025 Stork App. All rights reserved."
+    "copyright": "© 2025 Stork App. All rights reserved.",
+    "description": "We help find lost pets and provide new homes for shelter animals.",
+    "links": "Links",
+    "email": "Email",
+    "phone": "Phone"
   },
   "home": {
     "hero": {
@@ -56,6 +60,10 @@
         "title": "Learn",
         "description": "Get useful information about pet care"
       }
+    },
+    "callToAction": {
+      "title": "Join Us!",
+      "description": "Register as a shelter or individual and help animals"
     }
   },
   "animals": {
@@ -71,6 +79,10 @@
     "neutered": "Neutered",
     "microchipped": "Microchipped",
     "viewDetails": "View Details",
+    "mixedBreed": "Mixed",
+    "unknownAge": "Unknown age",
+    "monthsOld": "months old",
+    "shelter": "Shelter",
     "types": {
       "DOG": "Dog",
       "CAT": "Cat",
@@ -112,7 +124,9 @@
     "contactEmail": "Contact Email",
     "reward": "Reward (optional)",
     "submit": "Submit Report",
-    "error": "An error occurred while submitting the report"
+    "error": "An error occurred while submitting the report",
+    "unnamed": "Unnamed",
+    "rewardLabel": "Reward"
   },
   "foundPets": {
     "title": "Found Pets",
@@ -137,7 +151,8 @@
     "finderPhone": "Contact Phone",
     "finderEmail": "Contact Email",
     "submit": "Submit Report",
-    "error": "An error occurred while submitting the report"
+    "error": "An error occurred while submitting the report",
+    "temporaryLocationLabel": "Temporary location"
   },
   "tips": {
     "title": "Tips and Advice",
@@ -176,5 +191,72 @@
         "a3": "Extremely important, especially for puppies/kittens! Introduce them to other animals, people, environments. Careful, gradual introduction. Associate positive experiences with new situations."
       }
     }
+  },
+  "map": {
+    "title": "Map",
+    "subtitle": "Lost and found pets on the map",
+    "lost": "Lost",
+    "found": "Found",
+    "reunited": "Reunited",
+    "shelter": "Shelter",
+    "viewDetails": "View Details",
+    "lastSeen": "Last seen",
+    "foundOn": "Found on",
+    "reunitedOn": "Reunited on"
+  },
+  "shelters": {
+    "title": "Shelters",
+    "subtitle": "Find shelters near you",
+    "noShelters": "No shelters found",
+    "animals": "animals",
+    "viewShelter": "View Shelter",
+    "contact": "Contact"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "stats": "Statistics",
+    "totalAnimals": "Total Animals",
+    "available": "Available",
+    "adopted": "Adopted",
+    "addAnimal": "Add Animal",
+    "editAnimal": "Edit Animal",
+    "deleteAnimal": "Delete Animal",
+    "confirmDelete": "Are you sure you want to delete?"
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "avatar": "Avatar",
+    "uploadAvatar": "Upload Avatar",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "updateProfile": "Update Profile",
+    "updated": "Profile updated successfully"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email Address",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone Number",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "registerHere": "Register here",
+    "loggingIn": "Logging in...",
+    "registering": "Registering...",
+    "loginSuccess": "Login successful",
+    "registerSuccess": "Registration successful"
   }
 }
