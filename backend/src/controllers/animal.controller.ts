@@ -149,7 +149,7 @@ export const getAnimalById = asyncHandler(async (req: AuthRequest, res: Response
 
   res.json({
     status: 'success',
-    data: { animal },
+    data: animal,
   });
 });
 

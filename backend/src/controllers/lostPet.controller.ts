@@ -146,7 +146,7 @@ export const getLostPetById = asyncHandler(async (req: AuthRequest, res: Respons
 
   res.json({
     status: 'success',
-    data: { lostPet },
+    data: lostPet,
   });
 });
 

@@ -132,7 +132,7 @@ export const getShelterById = asyncHandler(async (req: AuthRequest, res: Respons
 
   res.json({
     status: 'success',
-    data: { shelter },
+    data: shelter,
   });
 });
 
@@ -159,7 +159,7 @@ export const getMyShelter = asyncHandler(async (req: AuthRequest, res: Response)
 
   res.json({
     status: 'success',
-    data: { shelter },
+    data: shelter,
   });
 });
 

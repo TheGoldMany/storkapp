@@ -140,7 +140,7 @@ export const getFoundPetById = asyncHandler(async (req: AuthRequest, res: Respon
 
   res.json({
     status: 'success',
-    data: { foundPet },
+    data: foundPet,
   });
 });
 
