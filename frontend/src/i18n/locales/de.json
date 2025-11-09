@@ -1,0 +1,180 @@
+{
+  "common": {
+    "appName": "Stork App",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "submit": "Senden",
+    "back": "Zurück",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "all": "Alle",
+    "required": "Erforderlich"
+  },
+  "nav": {
+    "home": "Startseite",
+    "animals": "Tiere",
+    "shelters": "Tierheime",
+    "lostPets": "Vermisste Tiere",
+    "foundPets": "Gefundene Tiere",
+    "tips": "Tipps",
+    "healthInfo": "Gesundheitsinformationen",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "dashboard": "Dashboard",
+    "profile": "Profil",
+    "logout": "Abmelden"
+  },
+  "footer": {
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "followUs": "Folgen Sie uns",
+    "copyright": "© 2025 Stork App. Alle Rechte vorbehalten."
+  },
+  "home": {
+    "hero": {
+      "title": "Finden Sie Ihren perfekten Begleiter",
+      "subtitle": "Wir helfen, Tiere mit liebevollen Familien zusammenzubringen",
+      "cta": "Tiere durchsuchen"
+    },
+    "features": {
+      "adopt": {
+        "title": "Adoptieren",
+        "description": "Finden Sie Ihren perfekten Begleiter aus unseren Tierheimen"
+      },
+      "report": {
+        "title": "Melden",
+        "description": "Helfen Sie vermissten Tieren, zu ihren Besitzern zurückzukehren"
+      },
+      "learn": {
+        "title": "Lernen",
+        "description": "Erhalten Sie nützliche Informationen über die Tierpflege"
+      }
+    }
+  },
+  "animals": {
+    "title": "Tiere zur Adoption",
+    "subtitle": "Finden Sie Ihren neuen besten Freund",
+    "noAnimals": "Keine Tiere mit den angegebenen Filtern gefunden",
+    "type": "Typ",
+    "breed": "Rasse",
+    "age": "Alter",
+    "gender": "Geschlecht",
+    "size": "Größe",
+    "vaccinated": "Geimpft",
+    "neutered": "Kastriert",
+    "microchipped": "Gechippt",
+    "viewDetails": "Details ansehen",
+    "types": {
+      "DOG": "Hund",
+      "CAT": "Katze",
+      "BIRD": "Vogel",
+      "RABBIT": "Kaninchen",
+      "OTHER": "Andere"
+    },
+    "genders": {
+      "MALE": "Männlich",
+      "FEMALE": "Weiblich"
+    },
+    "sizes": {
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß"
+    }
+  },
+  "lostPets": {
+    "title": "Vermisste Tiere",
+    "subtitle": "Helfen Sie, vermisste Tiere zu finden",
+    "report": "Vermisstes Tier melden",
+    "back": "Zurück zu vermissten Tieren",
+    "formTitle": "Vermisstes Tier melden",
+    "formSubtitle": "Füllen Sie das Formular aus, um uns zu helfen, Ihr vermisstes Tier zu finden",
+    "noLostPets": "Keine vermissten Tiere mit den angegebenen Filtern gefunden",
+    "name": "Tiername",
+    "type": "Typ",
+    "breed": "Rasse",
+    "color": "Farbe",
+    "gender": "Geschlecht",
+    "age": "Alter (Jahre)",
+    "description": "Beschreibung",
+    "images": "Fotos des Tieres",
+    "city": "Stadt",
+    "lastSeenLocation": "Zuletzt gesehener Ort",
+    "lastSeenDate": "Zuletzt gesehen am",
+    "contactName": "Kontaktname",
+    "contactPhone": "Kontakttelefon",
+    "contactEmail": "Kontakt-E-Mail",
+    "reward": "Belohnung (optional)",
+    "submit": "Meldung absenden",
+    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten"
+  },
+  "foundPets": {
+    "title": "Gefundene Tiere",
+    "subtitle": "Helfen Sie, gefundene Tiere mit ihren Besitzern zu vereinen",
+    "report": "Gefundenes Tier melden",
+    "back": "Zurück zu gefundenen Tieren",
+    "formTitle": "Gefundenes Tier melden",
+    "formSubtitle": "Wenn Sie ein Tier gefunden haben, füllen Sie das Formular aus, um es mit seinem Besitzer zu vereinen",
+    "noFoundPets": "Keine gefundenen Tiere mit den angegebenen Filtern",
+    "type": "Typ",
+    "breed": "Rasse (falls bekannt)",
+    "color": "Farbe",
+    "gender": "Geschlecht",
+    "age": "Geschätztes Alter (Jahre)",
+    "description": "Beschreibung",
+    "images": "Fotos des gefundenen Tieres",
+    "city": "Stadt",
+    "foundLocation": "Wo haben Sie es gefunden?",
+    "foundDate": "Wann haben Sie es gefunden?",
+    "currentLocation": "Vorübergehender Standort",
+    "finderName": "Name des Finders",
+    "finderPhone": "Kontakttelefon",
+    "finderEmail": "Kontakt-E-Mail",
+    "submit": "Meldung absenden",
+    "error": "Bei der Übermittlung der Meldung ist ein Fehler aufgetreten"
+  },
+  "tips": {
+    "title": "Tipps und Ratschläge",
+    "subtitle": "Alles, was Sie über die Tierpflege wissen müssen",
+    "categories": {
+      "firstDays": {
+        "title": "Erste Tage zu Hause",
+        "q1": "Wie bereite ich mein Zuhause auf ein neues Haustier vor?",
+        "a1": "Bereiten Sie den Platz im Voraus vor: Bett, Näpfe, Spielzeug. Entfernen Sie alle gefährlichen Gegenstände und Pflanzen. Bieten Sie einen ruhigen, sicheren Platz zum Ausruhen. Geben Sie ihnen Zeit, sich in den ersten Tagen anzupassen.",
+        "q2": "Wie viel Zeit wird für die Anpassung benötigt?",
+        "a2": "Normalerweise werden 2-4 Wochen benötigt, aber dies kann je nach Tier variieren. Seien Sie geduldig und konsequent. Es ist normal, wenn sie in den ersten Tagen schüchtern oder überaktiv sind."
+      },
+      "nutrition": {
+        "title": "Ernährung",
+        "q1": "Womit sollte ich mein neues Haustier füttern?",
+        "a1": "Verwenden Sie in den ersten Wochen das gleiche Futter, das sie im Tierheim erhalten haben, und wechseln Sie allmählich zu einer neuen Ernährung. Stellen Sie immer frisches Wasser zur Verfügung. Fragen Sie Ihren Tierarzt um Rat zur richtigen Ernährung.",
+        "q2": "Wie oft sollte ich füttern?",
+        "a2": "Hunde: 2-3 Mal täglich. Katzen: 2-4 kleinere Portionen täglich. Welpen/Kätzchen: häufiger, 3-4 Mal. Befolgen Sie die Portionsrichtlinien, um Überfütterung zu vermeiden."
+      },
+      "health": {
+        "title": "Gesundheitsvorsorge",
+        "q1": "Welche Impfungen werden benötigt?",
+        "a1": "Hunde: Tollwut, Kombinationsimpfstoff (Staupe, Parvo, Hepatitis). Katzen: Tollwut, Katzengrippe, Panleukopenie. Besprechen Sie den Impfplan mit Ihrem Tierarzt.",
+        "q2": "Wann sollte ich mein Tier zum Tierarzt bringen?",
+        "a2": "Erster Besuch: innerhalb von 1-2 Wochen nach der Adoption für eine allgemeine Untersuchung. Regelmäßig: 1-2 Mal jährlich. Sofort: wenn Sie ungewöhnliche Symptome bemerken (Erbrechen, Durchfall, Appetitlosigkeit, Lethargie).",
+        "q3": "Ist Parasitenprävention wichtig?",
+        "a3": "Ja, sehr wichtig! Äußere Parasiten (Flöhe, Zecken): monatlich. Innere Parasiten (Würmer): alle 3-6 Monate. Fragen Sie Ihren Tierarzt nach geeigneten Produkten."
+      },
+      "training": {
+        "title": "Training und Verhalten",
+        "q1": "Wie bringe ich Regeln bei?",
+        "a1": "Seien Sie konsequent mit allen Familienmitgliedern. Verwenden Sie positive Verstärkung (belohnen Sie gutes Verhalten). Verwenden Sie niemals körperliche Bestrafung. Beginnen Sie sofort, schieben Sie es nicht auf.",
+        "q2": "Was soll ich tun, wenn Verhaltensprobleme auftreten?",
+        "a2": "Versuchen Sie zuerst, die Ursache zu verstehen. Sorgen Sie für ausreichend Bewegung und geistige Stimulation. Konsultieren Sie einen Verhaltensspezialisten oder Trainer bei ernsteren Problemen. Seien Sie geduldig, Veränderung braucht Zeit.",
+        "q3": "Wie wichtig ist Sozialisierung?",
+        "a3": "Äußerst wichtig, besonders für Welpen/Kätzchen! Führen Sie sie anderen Tieren, Menschen und Umgebungen vor. Vorsichtige, schrittweise Einführung. Verknüpfen Sie positive Erfahrungen mit neuen Situationen."
+      }
+    }
+  }
+}

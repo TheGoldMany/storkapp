@@ -1,0 +1,180 @@
+{
+  "common": {
+    "appName": "Stork App",
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "submit": "Wyślij",
+    "back": "Wstecz",
+    "search": "Szukaj",
+    "filter": "Filtruj",
+    "all": "Wszystkie",
+    "required": "Wymagane"
+  },
+  "nav": {
+    "home": "Strona główna",
+    "animals": "Zwierzęta",
+    "shelters": "Schroniska",
+    "lostPets": "Zaginione zwierzęta",
+    "foundPets": "Znalezione zwierzęta",
+    "tips": "Porady",
+    "healthInfo": "Informacje zdrowotne",
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "dashboard": "Panel",
+    "profile": "Profil",
+    "logout": "Wyloguj się"
+  },
+  "footer": {
+    "about": "O nas",
+    "contact": "Kontakt",
+    "privacy": "Prywatność",
+    "terms": "Regulamin",
+    "followUs": "Śledź nas",
+    "copyright": "© 2025 Stork App. Wszelkie prawa zastrzeżone."
+  },
+  "home": {
+    "hero": {
+      "title": "Znajdź swojego idealnego towarzysza",
+      "subtitle": "Pomagamy połączyć zwierzęta z kochającymi rodzinami",
+      "cta": "Przeglądaj zwierzęta"
+    },
+    "features": {
+      "adopt": {
+        "title": "Adoptuj",
+        "description": "Znajdź idealnego towarzysza w naszych schroniskach"
+      },
+      "report": {
+        "title": "Zgłoś",
+        "description": "Pomóż zagubionym zwierzętom wrócić do właścicieli"
+      },
+      "learn": {
+        "title": "Ucz się",
+        "description": "Zdobądź przydatne informacje o opiece nad zwierzętami"
+      }
+    }
+  },
+  "animals": {
+    "title": "Zwierzęta do adopcji",
+    "subtitle": "Znajdź swojego nowego najlepszego przyjaciela",
+    "noAnimals": "Nie znaleziono zwierząt z podanymi filtrami",
+    "type": "Typ",
+    "breed": "Rasa",
+    "age": "Wiek",
+    "gender": "Płeć",
+    "size": "Rozmiar",
+    "vaccinated": "Zaszczepione",
+    "neutered": "Wykastrowane",
+    "microchipped": "Z chipem",
+    "viewDetails": "Zobacz szczegóły",
+    "types": {
+      "DOG": "Pies",
+      "CAT": "Kot",
+      "BIRD": "Ptak",
+      "RABBIT": "Królik",
+      "OTHER": "Inne"
+    },
+    "genders": {
+      "MALE": "Samiec",
+      "FEMALE": "Samica"
+    },
+    "sizes": {
+      "small": "Mały",
+      "medium": "Średni",
+      "large": "Duży"
+    }
+  },
+  "lostPets": {
+    "title": "Zaginione zwierzęta",
+    "subtitle": "Pomóż znaleźć zaginione zwierzęta",
+    "report": "Zgłoś zaginione zwierzę",
+    "back": "Powrót do zaginionych zwierząt",
+    "formTitle": "Zgłoś zaginione zwierzę",
+    "formSubtitle": "Wypełnij formularz poniżej, aby pomóc nam znaleźć twoje zaginione zwierzę",
+    "noLostPets": "Nie znaleziono zaginionych zwierząt z podanymi filtrami",
+    "name": "Imię zwierzęcia",
+    "type": "Typ",
+    "breed": "Rasa",
+    "color": "Kolor",
+    "gender": "Płeć",
+    "age": "Wiek (lata)",
+    "description": "Opis",
+    "images": "Zdjęcia zwierzęcia",
+    "city": "Miasto",
+    "lastSeenLocation": "Ostatnio widziane miejsce",
+    "lastSeenDate": "Data ostatniego widzenia",
+    "contactName": "Imię i nazwisko kontaktowe",
+    "contactPhone": "Telefon kontaktowy",
+    "contactEmail": "Email kontaktowy",
+    "reward": "Nagroda (opcjonalnie)",
+    "submit": "Wyślij zgłoszenie",
+    "error": "Wystąpił błąd podczas wysyłania zgłoszenia"
+  },
+  "foundPets": {
+    "title": "Znalezione zwierzęta",
+    "subtitle": "Pomóż połączyć znalezione zwierzęta z właścicielami",
+    "report": "Zgłoś znalezione zwierzę",
+    "back": "Powrót do znalezionych zwierząt",
+    "formTitle": "Zgłoś znalezione zwierzę",
+    "formSubtitle": "Jeśli znalazłeś zwierzę, wypełnij formularz poniżej, aby pomóc połączyć je z właścicielem",
+    "noFoundPets": "Nie znaleziono zwierząt z podanymi filtrami",
+    "type": "Typ",
+    "breed": "Rasa (jeśli znana)",
+    "color": "Kolor",
+    "gender": "Płeć",
+    "age": "Szacowany wiek (lata)",
+    "description": "Opis",
+    "images": "Zdjęcia znalezionego zwierzęcia",
+    "city": "Miasto",
+    "foundLocation": "Gdzie znalazłeś?",
+    "foundDate": "Kiedy znalazłeś?",
+    "currentLocation": "Tymczasowa lokalizacja",
+    "finderName": "Imię i nazwisko znalazcy",
+    "finderPhone": "Telefon kontaktowy",
+    "finderEmail": "Email kontaktowy",
+    "submit": "Wyślij zgłoszenie",
+    "error": "Wystąpił błąd podczas wysyłania zgłoszenia"
+  },
+  "tips": {
+    "title": "Porady i wskazówki",
+    "subtitle": "Wszystko, co musisz wiedzieć o opiece nad zwierzętami",
+    "categories": {
+      "firstDays": {
+        "title": "Pierwsze dni w domu",
+        "q1": "Jak przygotować dom na nowego pupila?",
+        "a1": "Przygotuj miejsce z wyprzedzeniem: legowisko, miski, zabawki. Usuń wszystkie niebezpieczne przedmioty i rośliny. Zapewnij spokojne, bezpieczne miejsce do odpoczynku. W pierwszych dniach daj mu czas na przystosowanie.",
+        "q2": "Ile czasu potrzeba na adaptację?",
+        "a2": "Zwykle potrzeba 2-4 tygodni, ale może się to różnić w zależności od zwierzęcia. Bądź cierpliwy i konsekwentny. W pierwszych dniach normalne jest, że jest nieśmiały lub nadaktywny."
+      },
+      "nutrition": {
+        "title": "Żywienie",
+        "q1": "Czym karmić nowego pupila?",
+        "a1": "W pierwszych tygodniach używaj tego samego jedzenia, które dostawał w schronisku, stopniowo przechodzić na nową dietę. Zawsze miej dostępną świeżą wodę. Zapytaj weterynarza o radę dotyczącą właściwego żywienia.",
+        "q2": "Jak często karmić?",
+        "a2": "Psy: 2-3 razy dziennie. Koty: 2-4 mniejsze porcje dziennie. Szczenięta/kocięta: częściej, 3-4 razy. Przestrzegaj wytycznych dotyczących porcji, aby uniknąć przekarmiania."
+      },
+      "health": {
+        "title": "Opieka zdrowotna",
+        "q1": "Jakie szczepienia są potrzebne?",
+        "a1": "Psy: wścieklizna, szczepionka kombinowana (nosówka, parvo, zapalenie wątroby). Koty: wścieklizna, katar koci, panleukopenia. Skonsultuj się z weterynarzem w sprawie harmonogramu szczepień.",
+        "q2": "Kiedy zabrać zwierzę do weterynarza?",
+        "a2": "Pierwsza wizyta: w ciągu 1-2 tygodni od adopcji na ogólne badanie. Regularne: 1-2 razy rocznie. Natychmiast: jeśli zauważysz jakiekolwiek nietypowe objawy (wymioty, biegunka, brak apetytu, letarg).",
+        "q3": "Czy zapobieganie pasożytom jest ważne?",
+        "a3": "Tak, bardzo ważne! Pasożyty zewnętrzne (pchły, kleszcze): co miesiąc. Pasożyty wewnętrzne (robaki): co 3-6 miesięcy. Zapytaj weterynarza o odpowiednie preparaty."
+      },
+      "training": {
+        "title": "Trening i zachowanie",
+        "q1": "Jak nauczyć zasad?",
+        "a1": "Bądź konsekwentny ze wszystkimi członkami rodziny. Używaj pozytywnego wzmocnienia (nagradzaj dobre zachowanie). Nigdy nie używaj kary fizycznej. Zacznij natychmiast, nie odkładaj.",
+        "q2": "Co robić, gdy pojawiają się problemy behawioralne?",
+        "a2": "Najpierw spróbuj zrozumieć przyczynę. Zapewnij wystarczająco dużo ruchu i stymulacji umysłowej. Skonsultuj się z behawiorystą lub trenerem w przypadku poważniejszych problemów. Bądź cierpliwy, zmiana wymaga czasu.",
+        "q3": "Jak ważna jest socjalizacja?",
+        "a3": "Niezwykle ważna, szczególnie dla szczeniąt/kociąt! Przedstaw je innym zwierzętom, ludziom, środowiskom. Ostrożne, stopniowe wprowadzenie. Kojarz pozytywne doświadczenia z nowymi sytuacjami."
+      }
+    }
+  }
+}

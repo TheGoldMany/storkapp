@@ -1,0 +1,180 @@
+{
+  "common": {
+    "appName": "Stork App",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "back": "Back",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "required": "Required"
+  },
+  "nav": {
+    "home": "Home",
+    "animals": "Animals",
+    "shelters": "Shelters",
+    "lostPets": "Lost Pets",
+    "foundPets": "Found Pets",
+    "tips": "Tips",
+    "healthInfo": "Health Information",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of Service",
+    "followUs": "Follow Us",
+    "copyright": "© 2025 Stork App. All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Find Your Perfect Companion",
+      "subtitle": "We help connect animals with loving families",
+      "cta": "Browse Animals"
+    },
+    "features": {
+      "adopt": {
+        "title": "Adopt",
+        "description": "Find your perfect companion from our shelters"
+      },
+      "report": {
+        "title": "Report",
+        "description": "Help lost animals reunite with their owners"
+      },
+      "learn": {
+        "title": "Learn",
+        "description": "Get useful information about pet care"
+      }
+    }
+  },
+  "animals": {
+    "title": "Adoptable Animals",
+    "subtitle": "Find your new best friend",
+    "noAnimals": "No animals found with the given filters",
+    "type": "Type",
+    "breed": "Breed",
+    "age": "Age",
+    "gender": "Gender",
+    "size": "Size",
+    "vaccinated": "Vaccinated",
+    "neutered": "Neutered",
+    "microchipped": "Microchipped",
+    "viewDetails": "View Details",
+    "types": {
+      "DOG": "Dog",
+      "CAT": "Cat",
+      "BIRD": "Bird",
+      "RABBIT": "Rabbit",
+      "OTHER": "Other"
+    },
+    "genders": {
+      "MALE": "Male",
+      "FEMALE": "Female"
+    },
+    "sizes": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    }
+  },
+  "lostPets": {
+    "title": "Lost Pets",
+    "subtitle": "Help find lost pets",
+    "report": "Report Lost Pet",
+    "back": "Back to Lost Pets",
+    "formTitle": "Report Lost Pet",
+    "formSubtitle": "Fill out the form below to help us find your lost pet",
+    "noLostPets": "No lost pets found with the given filters",
+    "name": "Pet Name",
+    "type": "Type",
+    "breed": "Breed",
+    "color": "Color",
+    "gender": "Gender",
+    "age": "Age (years)",
+    "description": "Description",
+    "images": "Photos of the animal",
+    "city": "City",
+    "lastSeenLocation": "Last Seen Location",
+    "lastSeenDate": "Last Seen Date",
+    "contactName": "Contact Name",
+    "contactPhone": "Contact Phone",
+    "contactEmail": "Contact Email",
+    "reward": "Reward (optional)",
+    "submit": "Submit Report",
+    "error": "An error occurred while submitting the report"
+  },
+  "foundPets": {
+    "title": "Found Pets",
+    "subtitle": "Help reunite found pets with their owners",
+    "report": "Report Found Pet",
+    "back": "Back to Found Pets",
+    "formTitle": "Report Found Pet",
+    "formSubtitle": "If you found an animal, fill out the form below to help reunite it with its owner",
+    "noFoundPets": "No found pets with the given filters",
+    "type": "Type",
+    "breed": "Breed (if known)",
+    "color": "Color",
+    "gender": "Gender",
+    "age": "Estimated Age (years)",
+    "description": "Description",
+    "images": "Photos of the found animal",
+    "city": "City",
+    "foundLocation": "Where did you find it?",
+    "foundDate": "When did you find it?",
+    "currentLocation": "Temporary Location",
+    "finderName": "Finder's Name",
+    "finderPhone": "Contact Phone",
+    "finderEmail": "Contact Email",
+    "submit": "Submit Report",
+    "error": "An error occurred while submitting the report"
+  },
+  "tips": {
+    "title": "Tips and Advice",
+    "subtitle": "Everything you need to know about pet care",
+    "categories": {
+      "firstDays": {
+        "title": "First Days at Home",
+        "q1": "How do I prepare my home for a new pet?",
+        "a1": "Prepare the space in advance: bed, bowls, toys. Remove all dangerous objects and plants. Provide a quiet, safe place to rest. Give them time to adjust during the first days.",
+        "q2": "How much time is needed for adjustment?",
+        "a2": "Usually 2-4 weeks are needed, but this can vary by animal. Be patient and consistent. It's normal if they're shy or overactive during the first days."
+      },
+      "nutrition": {
+        "title": "Nutrition",
+        "q1": "What should I feed my new pet?",
+        "a1": "During the first weeks, use the same food they received at the shelter, gradually transition to a new diet. Always have fresh water available. Ask your vet for advice on proper nutrition.",
+        "q2": "How often should I feed?",
+        "a2": "Dogs: 2-3 times daily. Cats: 2-4 smaller portions daily. Puppies/kittens: more frequently, 3-4 times. Follow portion guidelines to avoid overfeeding."
+      },
+      "health": {
+        "title": "Healthcare",
+        "q1": "What vaccinations are needed?",
+        "a1": "Dogs: rabies, combination vaccine (distemper, parvo, hepatitis). Cats: rabies, feline flu, panleukopenia. Consult with your vet about the vaccination schedule.",
+        "q2": "When should I take my pet to the vet?",
+        "a2": "First visit: within 1-2 weeks of adoption for a general checkup. Regular: 1-2 times annually. Immediately: if you notice any unusual symptoms (vomiting, diarrhea, loss of appetite, lethargy).",
+        "q3": "Is parasite prevention important?",
+        "a3": "Yes, very important! External parasites (fleas, ticks): monthly. Internal parasites (worms): every 3-6 months. Ask your vet about the appropriate products."
+      },
+      "training": {
+        "title": "Training and Behavior",
+        "q1": "How do I teach rules?",
+        "a1": "Be consistent with all family members. Use positive reinforcement (reward good behavior). Never use physical punishment. Start immediately, don't delay.",
+        "q2": "What should I do if behavioral problems occur?",
+        "a2": "First try to understand the cause. Provide enough exercise and mental stimulation. Consult a behaviorist or trainer for serious problems. Be patient, change takes time.",
+        "q3": "How important is socialization?",
+        "a3": "Extremely important, especially for puppies/kittens! Introduce them to other animals, people, environments. Careful, gradual introduction. Associate positive experiences with new situations."
+      }
+    }
+  }
+}

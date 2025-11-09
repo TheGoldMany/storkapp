@@ -1,0 +1,180 @@
+{
+  "common": {
+    "appName": "Stork App",
+    "loading": "Betöltés...",
+    "error": "Hiba",
+    "success": "Sikeres",
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "submit": "Küldés",
+    "back": "Vissza",
+    "search": "Keresés",
+    "filter": "Szűrés",
+    "all": "Összes",
+    "required": "Kötelező"
+  },
+  "nav": {
+    "home": "Kezdőlap",
+    "animals": "Állatok",
+    "shelters": "Menhelyek",
+    "lostPets": "Elveszett állatok",
+    "foundPets": "Talált állatok",
+    "tips": "Tanácsok",
+    "healthInfo": "Egészségügyi információk",
+    "login": "Bejelentkezés",
+    "register": "Regisztráció",
+    "dashboard": "Irányítópult",
+    "profile": "Profil",
+    "logout": "Kijelentkezés"
+  },
+  "footer": {
+    "about": "Rólunk",
+    "contact": "Kapcsolat",
+    "privacy": "Adatvédelem",
+    "terms": "Felhasználási feltételek",
+    "followUs": "Kövess minket",
+    "copyright": "© 2025 Stork App. Minden jog fenntartva."
+  },
+  "home": {
+    "hero": {
+      "title": "Találd meg tökéletes társad",
+      "subtitle": "Segítünk összehozni az állatokat a szerető családokkal",
+      "cta": "Böngészd az állatokat"
+    },
+    "features": {
+      "adopt": {
+        "title": "Fogadj örökbe",
+        "description": "Találj tökéletes társat menhelyeinkből"
+      },
+      "report": {
+        "title": "Jelentsd be",
+        "description": "Segíts elveszett állatokat visszajuttatni gazdájukhoz"
+      },
+      "learn": {
+        "title": "Tanulj",
+        "description": "Szerezz hasznos információkat állatok gondozásáról"
+      }
+    }
+  },
+  "animals": {
+    "title": "Örökbefogadható állatok",
+    "subtitle": "Találd meg új legjobb barátodat",
+    "noAnimals": "Nem találtunk állatokat a megadott szűrőkkel",
+    "type": "Típus",
+    "breed": "Fajta",
+    "age": "Kor",
+    "gender": "Nem",
+    "size": "Méret",
+    "vaccinated": "Oltott",
+    "neutered": "Ivartalanított",
+    "microchipped": "Chippel ellátott",
+    "viewDetails": "Részletek megtekintése",
+    "types": {
+      "DOG": "Kutya",
+      "CAT": "Macska",
+      "BIRD": "Madár",
+      "RABBIT": "Nyúl",
+      "OTHER": "Egyéb"
+    },
+    "genders": {
+      "MALE": "Hím",
+      "FEMALE": "Nőstény"
+    },
+    "sizes": {
+      "small": "Kicsi",
+      "medium": "Közepes",
+      "large": "Nagy"
+    }
+  },
+  "lostPets": {
+    "title": "Elveszett állatok",
+    "subtitle": "Segíts megtalálni az elveszett kedvenceket",
+    "report": "Elvesztett állat bejelentése",
+    "back": "Vissza az elveszett állatokhoz",
+    "formTitle": "Elveszett állat bejelentése",
+    "formSubtitle": "Töltsd ki az alábbi űrlapot, hogy segíthessünk megtalálni elveszett kedvencedet",
+    "noLostPets": "Nem találtunk elveszett állatokat a megadott szűrőkkel",
+    "name": "Állat neve",
+    "type": "Típus",
+    "breed": "Fajta",
+    "color": "Szín",
+    "gender": "Nem",
+    "age": "Kor (év)",
+    "description": "Leírás",
+    "images": "Fényképek az állatról",
+    "city": "Város",
+    "lastSeenLocation": "Utoljára látott helyszín",
+    "lastSeenDate": "Utoljára látva dátuma",
+    "contactName": "Kapcsolattartó neve",
+    "contactPhone": "Kapcsolattartói telefon",
+    "contactEmail": "Kapcsolattartói email",
+    "reward": "Jutalom (opcionális, Ft-ban)",
+    "submit": "Bejelentés elküldése",
+    "error": "Hiba történt a bejelentés során"
+  },
+  "foundPets": {
+    "title": "Talált állatok",
+    "subtitle": "Segíts visszajuttatni a talált állatokat gazdájukhoz",
+    "report": "Talált állat bejelentése",
+    "back": "Vissza a talált állatokhoz",
+    "formTitle": "Talált állat bejelentése",
+    "formSubtitle": "Ha találtál egy állatot, töltsd ki az alábbi űrlapot, hogy segíthessünk visszajuttatni gazdájához",
+    "noFoundPets": "Nem találtunk talált állatokat a megadott szűrőkkel",
+    "type": "Típus",
+    "breed": "Fajta (ha ismert)",
+    "color": "Szín",
+    "gender": "Nem",
+    "age": "Becsült kor (év)",
+    "description": "Leírás",
+    "images": "Fényképek a talált állatról",
+    "city": "Város",
+    "foundLocation": "Hol találtad?",
+    "foundDate": "Mikor találtad?",
+    "currentLocation": "Ideiglenes tartózkodási hely",
+    "finderName": "Megtaláló neve",
+    "finderPhone": "Kapcsolattartói telefon",
+    "finderEmail": "Kapcsolattartói email",
+    "submit": "Bejelentés elküldése",
+    "error": "Hiba történt a bejelentés során"
+  },
+  "tips": {
+    "title": "Tanácsok és tippek",
+    "subtitle": "Minden, amit tudnod kell a háziállatok gondozásáról",
+    "categories": {
+      "firstDays": {
+        "title": "Első napok otthon",
+        "q1": "Hogyan készítsem fel az otthonomat az új háziállat érkezésére?",
+        "a1": "Készítsd elő a helyet előre: ágy, tálak, játékok. Távolíts el minden veszélyes tárgyat és növényt. Biztosíts csendes, biztonságos helyet pihenésre. Az első napokban adj neki időt alkalmazkodni.",
+        "q2": "Mennyi időre van szükség az alkalmazkodáshoz?",
+        "a2": "Általában 2-4 hétre van szükség, de ez állatonként változhat. Légy türelmes és következetes. Az első napokban normális, ha félénk vagy túlaktív."
+      },
+      "nutrition": {
+        "title": "Táplálkozás",
+        "q1": "Mivel etessem az új háziállatot?",
+        "a1": "Az első hetekben használd ugyanazt az ételt, amit a menhelyen kapott, fokozatosan válts át új étrendre. Mindig legyen friss víz elérhető. Kérd ki az állatorvos tanácsát a megfelelő táplálásról.",
+        "q2": "Milyen gyakran etessek?",
+        "a2": "Kutyák: napi 2-3 alkalommal. Macskák: napi 2-4 kisebb adag. Kölykök: gyakrabban, 3-4 alkalommal. Tartsd be az adagolási útmutatót a túletetés elkerülése érdekében."
+      },
+      "health": {
+        "title": "Egészségügy",
+        "q1": "Milyen oltásokra van szükség?",
+        "a1": "Kutyák: veszettség, kombinált oltás (kiütéses distemper, parvo, hepatitis). Macskák: veszettség, macska-influenza, panleukopenia. Az oltási tervet állatorvossal egyeztess.",
+        "q2": "Mikor vigyem állatorvoshoz?",
+        "a2": "Első vizit: 1-2 héten belül az örökbefogadás után általános ellenőrzésre. Rendszeres: évente 1-2 alkalom. Azonnal: ha bármilyen szokatlan tünetet észlelsz (hányás, hasmenés, étvágytalanság, letargia).",
+        "q3": "Fontos-e a parazitaellenes kezelés?",
+        "a3": "Igen, nagyon fontos! Külső paraziták (bolha, kullancs): havi rendszerességgel. Belső paraziták (férgek): 3-6 havonta. Kérd ki az állatorvos tanácsát a megfelelő készítményről."
+      },
+      "training": {
+        "title": "Nevelés és viselkedés",
+        "q1": "Hogyan szoktassam hozzá a szabályokhoz?",
+        "a1": "Légy következetes minden családtaggal. Használj pozitív megerősítést (jutalmazás helyes viselkedésért). Soha ne használj fizikai büntetést. Kezdd azonnal, ne halaszd későbbre.",
+        "q2": "Mit tegyek, ha viselkedési problémák jelentkeznek?",
+        "a2": "Először próbáld megérteni az okot. Biztosíts elég mozgást és szellemi stimulációt. Fordulj viselkedés-specialistához vagy trénerhez súlyosabb problémák esetén. Légy türelmes, a változás időt igényel.",
+        "q3": "Mennyire fontos a szocializáció?",
+        "a3": "Rendkívül fontos, főleg kölykököknél! Ismertesd meg más állatokkal, emberekkel, környezetekkel. Óvatos, fokozatos bemutatás. Pozitív élmények társítása új helyzetekhez."
+      }
+    }
+  }
+}
