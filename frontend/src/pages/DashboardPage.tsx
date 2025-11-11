@@ -85,8 +85,8 @@ const DashboardPage = () => {
     try {
       setLoading(true)
       const response = await shelterAPI.getMyShelter()
-      setShelter(response.data.data.shelter)
-      setAnimals(response.data.data.shelter.animals || [])
+      setShelter(response.data.data)
+      setAnimals(response.data.data.animals || [])
     } catch (err: any) {
       if (err.response?.status === 404) {
         setError('Még nem hoztál létre menhelyet')
