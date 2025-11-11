@@ -10,6 +10,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
+    "cleanup:images": "ts-node src/scripts/cleanupOrphanedImages.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },

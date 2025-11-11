@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import { statusService } from '../services/status.service';
+import { deleteImageFiles } from '../utils/fileCleanup';
 import axios from 'axios';
 
 const prisma = new PrismaClient();
@@ -185,6 +186,11 @@ export const deleteFoundPet = asyncHandler(async (req: AuthRequest, res: Respons
 
   if (foundPet.userId !== req.user!.id) {
     throw new AppError('Unauthorized', 403);
+  }
+
+  // Delete associated image files before deleting the database record
+  if (foundPet.images && foundPet.images.length > 0) {
+    deleteImageFiles(foundPet.images);
   }
 
   await prisma.foundPet.delete({ where: { id } });

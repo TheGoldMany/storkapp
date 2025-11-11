@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { deleteImageFiles } from '../utils/fileCleanup';
 
 const prisma = new PrismaClient();
 
@@ -69,42 +70,77 @@ class StatusService {
     const now = new Date();
 
     try {
-      // Delete expired animals
-      const deletedAnimals = await prisma.animal.deleteMany({
+      // Find and delete expired animals with their images
+      const expiredAnimals = await prisma.animal.findMany({
         where: {
           deletionScheduledAt: {
             lte: now,
           },
+        },
+        select: {
+          id: true,
+          images: true,
         },
       });
 
-      // Delete expired lost pets
-      const deletedLostPets = await prisma.lostPet.deleteMany({
+      for (const animal of expiredAnimals) {
+        if (animal.images && animal.images.length > 0) {
+          deleteImageFiles(animal.images);
+        }
+        await prisma.animal.delete({ where: { id: animal.id } });
+      }
+
+      // Find and delete expired lost pets with their images
+      const expiredLostPets = await prisma.lostPet.findMany({
         where: {
           deletionScheduledAt: {
             lte: now,
           },
+        },
+        select: {
+          id: true,
+          images: true,
         },
       });
 
-      // Delete expired found pets
-      const deletedFoundPets = await prisma.foundPet.deleteMany({
+      for (const lostPet of expiredLostPets) {
+        if (lostPet.images && lostPet.images.length > 0) {
+          deleteImageFiles(lostPet.images);
+        }
+        await prisma.lostPet.delete({ where: { id: lostPet.id } });
+      }
+
+      // Find and delete expired found pets with their images
+      const expiredFoundPets = await prisma.foundPet.findMany({
         where: {
           deletionScheduledAt: {
             lte: now,
           },
         },
+        select: {
+          id: true,
+          images: true,
+        },
       });
+
+      for (const foundPet of expiredFoundPets) {
+        if (foundPet.images && foundPet.images.length > 0) {
+          deleteImageFiles(foundPet.images);
+        }
+        await prisma.foundPet.delete({ where: { id: foundPet.id } });
+      }
+
+      const totalDeleted = {
+        animals: expiredAnimals.length,
+        lostPets: expiredLostPets.length,
+        foundPets: expiredFoundPets.length,
+      };
 
       console.log(
-        `Auto-deletion completed: ${deletedAnimals.count} animals, ${deletedLostPets.count} lost pets, ${deletedFoundPets.count} found pets`
+        `Auto-deletion completed: ${totalDeleted.animals} animals, ${totalDeleted.lostPets} lost pets, ${totalDeleted.foundPets} found pets`
       );
 
-      return {
-        animals: deletedAnimals.count,
-        lostPets: deletedLostPets.count,
-        foundPets: deletedFoundPets.count,
-      };
+      return totalDeleted;
     } catch (error) {
       console.error('Auto-deletion error:', error);
       throw error;
