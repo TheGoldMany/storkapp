@@ -44,6 +44,7 @@ const DashboardPage = () => {
   const [myLostPets, setMyLostPets] = useState<any[]>([])
   const [myFoundPets, setMyFoundPets] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
 
   // Animal dialog
   const [openAnimalDialog, setOpenAnimalDialog] = useState(false)
@@ -190,21 +191,33 @@ const DashboardPage = () => {
 
   const handleSaveAnimal = async () => {
     try {
+      setSaving(true)
       const data = {
         ...animalForm,
         age: animalForm.age ? parseInt(animalForm.age) : null,
       }
 
+      console.log('Saving animal with data:', data)
+
       if (editingAnimal) {
-        await animalAPI.updateAnimal(editingAnimal.id, data)
+        console.log('Updating animal:', editingAnimal.id)
+        const response = await animalAPI.updateAnimal(editingAnimal.id, data)
+        console.log('Update response:', response)
       } else {
-        await animalAPI.createAnimal(data)
+        console.log('Creating new animal')
+        const response = await animalAPI.createAnimal(data)
+        console.log('Create response:', response)
       }
 
       handleCloseAnimalDialog()
       fetchShelterData()
     } catch (err: any) {
-      alert(err.response?.data?.message || 'Hiba történt')
+      console.error('Error saving animal:', err)
+      console.error('Error response:', err.response)
+      const errorMessage = err.response?.data?.message || err.message || 'Hiba történt az állat mentése során'
+      alert(`HIBA: ${errorMessage}\n\nEllenőrizd, hogy az adatbázis migráció alkalmazva lett-e!`)
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -778,9 +791,13 @@ const DashboardPage = () => {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseAnimalDialog}>Mégse</Button>
-            <Button onClick={handleSaveAnimal} variant="contained">
-              {editingAnimal ? 'Mentés' : 'Hozzáadás'}
+            <Button onClick={handleCloseAnimalDialog} disabled={saving}>Mégse</Button>
+            <Button
+              onClick={handleSaveAnimal}
+              variant="contained"
+              disabled={saving}
+            >
+              {saving ? 'Mentés...' : (editingAnimal ? 'Mentés' : 'Hozzáadás')}
             </Button>
           </DialogActions>
         </Dialog>
