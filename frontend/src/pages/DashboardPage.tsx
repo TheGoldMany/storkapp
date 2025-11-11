@@ -22,6 +22,9 @@ import {
   DialogActions,
   TextField,
   MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from '@mui/material'
 import {
   Add as AddIcon,
@@ -128,6 +131,24 @@ const DashboardPage = () => {
       fetchUserReports()
     } catch (err: any) {
       alert(err.response?.data?.message || 'Hiba történt a törlés során')
+    }
+  }
+
+  const handleLostPetStatusChange = async (id: string, newStatus: string) => {
+    try {
+      await lostPetAPI.updateLostPet(id, { status: newStatus })
+      fetchUserReports()
+    } catch (err: any) {
+      alert(err.response?.data?.message || 'Hiba történt a státusz megváltoztatása során')
+    }
+  }
+
+  const handleFoundPetStatusChange = async (id: string, newStatus: string) => {
+    try {
+      await foundPetAPI.updateFoundPet(id, { status: newStatus })
+      fetchUserReports()
+    } catch (err: any) {
+      alert(err.response?.data?.message || 'Hiba történt a státusz megváltoztatása során')
     }
   }
 
@@ -367,12 +388,18 @@ const DashboardPage = () => {
                         <Typography variant="body2" color="text.secondary">
                           {pet.lastSeenLocation}, {pet.lastSeenCity}
                         </Typography>
-                        <Chip
-                          label={pet.status}
-                          size="small"
-                          color="error"
-                          sx={{ mt: 1 }}
-                        />
+                        <FormControl fullWidth sx={{ mt: 2 }} size="small">
+                          <InputLabel>Státusz</InputLabel>
+                          <Select
+                            value={pet.status}
+                            label="Státusz"
+                            onChange={(e) => handleLostPetStatusChange(pet.id, e.target.value)}
+                          >
+                            <MenuItem value="LOST">Elveszett</MenuItem>
+                            <MenuItem value="REUNITED">Gazdájához került</MenuItem>
+                            <MenuItem value="CLOSED">Lezárt</MenuItem>
+                          </Select>
+                        </FormControl>
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={() => navigate(`/lost-pets/${pet.id}`)}>
@@ -412,12 +439,18 @@ const DashboardPage = () => {
                         <Typography variant="body2" color="text.secondary">
                           {pet.foundLocation}, {pet.foundCity}
                         </Typography>
-                        <Chip
-                          label={pet.status}
-                          size="small"
-                          color="success"
-                          sx={{ mt: 1 }}
-                        />
+                        <FormControl fullWidth sx={{ mt: 2 }} size="small">
+                          <InputLabel>Státusz</InputLabel>
+                          <Select
+                            value={pet.status}
+                            label="Státusz"
+                            onChange={(e) => handleFoundPetStatusChange(pet.id, e.target.value)}
+                          >
+                            <MenuItem value="FOUND">Gazdát keres</MenuItem>
+                            <MenuItem value="REUNITED">Gazdájához került</MenuItem>
+                            <MenuItem value="CLOSED">Lezárt</MenuItem>
+                          </Select>
+                        </FormControl>
                       </CardContent>
                       <CardActions>
                         <Button size="small" onClick={() => navigate(`/found-pets/${pet.id}`)}>
