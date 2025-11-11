@@ -194,3 +194,22 @@ export const deleteFoundPet = asyncHandler(async (req: AuthRequest, res: Respons
     message: 'Found pet deleted successfully',
   });
 });
+
+export const getMyFoundPets = asyncHandler(async (req: AuthRequest, res: Response) => {
+  const foundPets = await prisma.foundPet.findMany({
+    where: { userId: req.user!.id },
+    include: {
+      matches: {
+        where: { dismissed: false },
+        orderBy: { confidence: 'desc' },
+        take: 5,
+      },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  res.json({
+    status: 'success',
+    data: { foundPets },
+  });
+});

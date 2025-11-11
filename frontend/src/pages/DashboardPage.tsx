@@ -31,7 +31,7 @@ import {
   Home as HomeIcon,
 } from '@mui/icons-material'
 import { RootState } from '../store/store'
-import { shelterAPI, animalAPI } from '../services/api'
+import { shelterAPI, animalAPI, lostPetAPI, foundPetAPI } from '../services/api'
 import ImageUpload from '../components/ImageUpload'
 
 const DashboardPage = () => {
@@ -41,6 +41,8 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true)
   const [shelter, setShelter] = useState<any>(null)
   const [animals, setAnimals] = useState<any[]>([])
+  const [myLostPets, setMyLostPets] = useState<any[]>([])
+  const [myFoundPets, setMyFoundPets] = useState<any[]>([])
   const [error, setError] = useState<string | null>(null)
 
   // Animal dialog
@@ -68,6 +70,8 @@ const DashboardPage = () => {
   useEffect(() => {
     if (user?.role === 'SHELTER_ADMIN') {
       fetchShelterData()
+    } else if (user?.role === 'USER') {
+      fetchUserReports()
     } else {
       setLoading(false)
     }
@@ -87,6 +91,42 @@ const DashboardPage = () => {
       }
     } finally {
       setLoading(false)
+    }
+  }
+
+  const fetchUserReports = async () => {
+    try {
+      setLoading(true)
+      const [lostPetsResponse, foundPetsResponse] = await Promise.all([
+        lostPetAPI.getMyLostPets(),
+        foundPetAPI.getMyFoundPets(),
+      ])
+      setMyLostPets(lostPetsResponse.data.data.lostPets || [])
+      setMyFoundPets(foundPetsResponse.data.data.foundPets || [])
+    } catch (err: any) {
+      setError('Hiba történt az adatok betöltésekor')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDeleteLostPet = async (id: string) => {
+    if (!window.confirm('Biztosan törölni szeretnéd ezt a bejelentést?')) return
+    try {
+      await lostPetAPI.deleteLostPet(id)
+      fetchUserReports()
+    } catch (err: any) {
+      alert(err.response?.data?.message || 'Hiba történt a törlés során')
+    }
+  }
+
+  const handleDeleteFoundPet = async (id: string) => {
+    if (!window.confirm('Biztosan törölni szeretnéd ezt a bejelentést?')) return
+    try {
+      await foundPetAPI.deleteFoundPet(id)
+      fetchUserReports()
+    } catch (err: any) {
+      alert(err.response?.data?.message || 'Hiba történt a törlés során')
     }
   }
 
@@ -239,8 +279,8 @@ const DashboardPage = () => {
                   </Typography>
                   <Button
                     variant="contained"
-                    color="secondary"
-                    onClick={() => navigate('/lost-pets')}
+                    color="error"
+                    onClick={() => navigate('/lost-pets/report')}
                   >
                     Bejelentés
                   </Button>
@@ -259,8 +299,8 @@ const DashboardPage = () => {
                   </Typography>
                   <Button
                     variant="contained"
-                    color="secondary"
-                    onClick={() => navigate('/found-pets')}
+                    color="success"
+                    onClick={() => navigate('/found-pets/report')}
                   >
                     Bejelentés
                   </Button>
@@ -287,6 +327,103 @@ const DashboardPage = () => {
               </Card>
             </Grid>
           </Grid>
+
+          {/* My Reports Section */}
+          <Box sx={{ mt: 6 }}>
+            <Typography variant="h5" gutterBottom>
+              Saját bejelentéseim
+            </Typography>
+
+            {/* Lost Pets */}
+            <Typography variant="h6" sx={{ mt: 3, mb: 2, color: 'error.main' }}>
+              Elveszett állatok ({myLostPets.length})
+            </Typography>
+            {myLostPets.length === 0 ? (
+              <Paper sx={{ p: 3, textAlign: 'center' }}>
+                <Typography variant="body2" color="text.secondary">
+                  Még nincs elveszett állat bejelentve
+                </Typography>
+              </Paper>
+            ) : (
+              <Grid container spacing={2}>
+                {myLostPets.map((pet) => (
+                  <Grid item xs={12} sm={6} md={4} key={pet.id}>
+                    <Card>
+                      <CardContent>
+                        <Typography variant="h6">{pet.name || 'Névtelen'}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {pet.lastSeenLocation}, {pet.lastSeenCity}
+                        </Typography>
+                        <Chip
+                          label={pet.status}
+                          size="small"
+                          color="error"
+                          sx={{ mt: 1 }}
+                        />
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={() => navigate(`/lost-pets/${pet.id}`)}>
+                          Megtekintés
+                        </Button>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDeleteLostPet(pet.id)}
+                          color="error"
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+
+            {/* Found Pets */}
+            <Typography variant="h6" sx={{ mt: 4, mb: 2, color: 'success.main' }}>
+              Talált állatok ({myFoundPets.length})
+            </Typography>
+            {myFoundPets.length === 0 ? (
+              <Paper sx={{ p: 3, textAlign: 'center' }}>
+                <Typography variant="body2" color="text.secondary">
+                  Még nincs talált állat bejelentve
+                </Typography>
+              </Paper>
+            ) : (
+              <Grid container spacing={2}>
+                {myFoundPets.map((pet) => (
+                  <Grid item xs={12} sm={6} md={4} key={pet.id}>
+                    <Card>
+                      <CardContent>
+                        <Typography variant="h6">Talált {pet.type}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {pet.foundLocation}, {pet.foundCity}
+                        </Typography>
+                        <Chip
+                          label={pet.status}
+                          size="small"
+                          color="success"
+                          sx={{ mt: 1 }}
+                        />
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={() => navigate(`/found-pets/${pet.id}`)}>
+                          Megtekintés
+                        </Button>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDeleteFoundPet(pet.id)}
+                          color="error"
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+          </Box>
         </Box>
       </Container>
     )

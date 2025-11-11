@@ -56,16 +56,20 @@ export const animalAPI = {
 export const lostPetAPI = {
   getLostPets: (params?: any) => api.get('/lost-pets', { params }),
   getLostPetById: (id: string) => api.get(`/lost-pets/${id}`),
+  getMyLostPets: () => api.get('/lost-pets/me/lost-pets'),
   createLostPet: (data: any) => api.post('/lost-pets', data),
   updateLostPet: (id: string, data: any) => api.put(`/lost-pets/${id}`, data),
+  deleteLostPet: (id: string) => api.delete(`/lost-pets/${id}`),
 }
 
 // Found Pet API
 export const foundPetAPI = {
   getFoundPets: (params?: any) => api.get('/found-pets', { params }),
   getFoundPetById: (id: string) => api.get(`/found-pets/${id}`),
+  getMyFoundPets: () => api.get('/found-pets/me/found-pets'),
   createFoundPet: (data: any) => api.post('/found-pets', data),
   updateFoundPet: (id: string, data: any) => api.put(`/found-pets/${id}`, data),
+  deleteFoundPet: (id: string) => api.delete(`/found-pets/${id}`),
 }
 
 // Subscription API
