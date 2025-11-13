@@ -17,6 +17,12 @@
  *   npm run geocode:existing
  */
 
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables from .env file
+dotenv.config({ path: path.join(__dirname, '../../.env') });
+
 import { PrismaClient } from '@prisma/client';
 import { geocodingService } from '../services/geocoding.service';
 
