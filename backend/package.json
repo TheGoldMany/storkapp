@@ -11,6 +11,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "cleanup:images": "ts-node src/scripts/cleanupOrphanedImages.ts",
+    "geocode:existing": "ts-node src/scripts/geocodeExistingRecords.ts",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },

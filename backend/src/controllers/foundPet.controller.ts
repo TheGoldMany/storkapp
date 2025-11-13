@@ -4,6 +4,7 @@ import { AuthRequest } from '../middleware/auth';
 import { AppError, asyncHandler } from '../middleware/errorHandler';
 import { statusService } from '../services/status.service';
 import { deleteImageFiles } from '../utils/fileCleanup';
+import { geocodingService } from '../services/geocoding.service';
 import axios from 'axios';
 
 const prisma = new PrismaClient();
@@ -32,6 +33,19 @@ export const createFoundPet = asyncHandler(async (req: AuthRequest, res: Respons
     currentLocation,
   } = req.body;
 
+  // Geocode address if coordinates not provided
+  let coords = { latitude, longitude };
+  if (!latitude || !longitude) {
+    const geocoded = await geocodingService.geocodeAddress(
+      foundLocation || '',
+      foundCity,
+      'Hungary'
+    );
+    if (geocoded) {
+      coords = geocoded;
+    }
+  }
+
   const foundPet = await prisma.foundPet.create({
     data: {
       type: type as AnimalType,
@@ -45,8 +59,8 @@ export const createFoundPet = asyncHandler(async (req: AuthRequest, res: Respons
       foundLocation,
       foundCity,
       foundDate: new Date(foundDate),
-      latitude,
-      longitude,
+      latitude: coords.latitude,
+      longitude: coords.longitude,
       finderName,
       finderPhone,
       finderEmail,
